@@ -22,27 +22,27 @@ public class Header extends JPanel {
 		btnFace = new JButton("");
 		btnFace.setBounds(658, 0, 48, 48);
 		btnFace.setBackground(colorBackgroundHeader);
-		btnFace.setIcon(new ImageIcon(IEP.class.getResource("/imgs/facebook.png")));
+		btnFace.setIcon(new ImageIcon(IEP.class.getResource("/resources/imgs/facebook.png")));
 		
 		btnTwitter = new JButton("");
 		btnTwitter.setBounds(706, 0, 46, 48);
 		btnTwitter.setBackground(colorBackgroundHeader);
-		btnTwitter.setIcon(new ImageIcon(IEP.class.getResource("/imgs/twitter.png")));
+		btnTwitter.setIcon(new ImageIcon(IEP.class.getResource("/resources/imgs/twitter.png")));
 		
 		btnYoutube = new JButton("");
 		btnYoutube.setBounds(752, 0, 48, 48);
 		btnYoutube.setBackground(colorBackgroundHeader);
-		btnYoutube.setIcon(new ImageIcon(IEP.class.getResource("/imgs/youtube.png")));		
+		btnYoutube.setIcon(new ImageIcon(IEP.class.getResource("/resources/imgs/youtube.png")));		
 		
 		btnIEP03 = new JButton("");
 		btnIEP03.setBounds(0, 0, 105, 48);
 		btnIEP03.setBackground(colorBackgroundHeader);
-		btnIEP03.setIcon(new ImageIcon(IEP.class.getResource("/imgs/IEP03.png")));		
+		btnIEP03.setIcon(new ImageIcon(IEP.class.getResource("/resources/imgs/IEP03.png")));		
 		
 		lblIEP04 = new JLabel("");
 		lblIEP04.setBackground(colorBackgroundHeader);
 		lblIEP04.setBounds(105, 0, 136, 48);
-		lblIEP04.setIcon(new ImageIcon(IEP.class.getResource("/imgs/IEP04.png")));		
+		lblIEP04.setIcon(new ImageIcon(IEP.class.getResource("/resources/imgs/IEP04.png")));		
 		setLayout(null);
 		this.add(btnIEP03);
 		this.add(lblIEP04);

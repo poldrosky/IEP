@@ -28,7 +28,7 @@ public class Projects extends JPanel {
 		lblIEP11 = new JLabel("");
 		lblIEP11.setBackground(new Color(0,0,0,0));
 		lblIEP11.setBounds(0, 0, 700, 406);
-		lblIEP11.setIcon(new ImageIcon(IEP.class.getResource("/imgs/IEP11.png")));
+		lblIEP11.setIcon(new ImageIcon(IEP.class.getResource("/resources/imgs/IEP11.png")));
 		
 		lblTablaDeProyectos = new JLabel("Tabla De Proyectos");
 		lblTablaDeProyectos.setBounds(50, 50, 200, 50);
@@ -42,10 +42,10 @@ public class Projects extends JPanel {
 		});
 		btnLoadProject.setBounds(467, 50, 183, 50);
 		btnLoadProject.setBackground(new Color(0,0,0,0));
-		btnLoadProject.setIcon(new ImageIcon(IEP.class.getResource("/imgs/loadProject.png")));
+		btnLoadProject.setIcon(new ImageIcon(IEP.class.getResource("/resources/imgs/loadProject.png")));
 		
 		btnGoProject = new JButton("Boton");
-		btnGoProject.setIcon(new ImageIcon(IEP.class.getResource("/imgs/GoProject.png")));
+		btnGoProject.setIcon(new ImageIcon(IEP.class.getResource("/resources/imgs/GoProject.png")));
 		
 		Object[][] data = {
 			    {"2020", "Nariño",

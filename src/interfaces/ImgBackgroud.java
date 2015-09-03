@@ -13,7 +13,7 @@ public class ImgBackgroud extends JPanel {
 	
 	public ImgBackgroud() {
 		this.setBounds(0, 48, 800, 552);
-		background = this.getClass().getResource("/imgs/background.png");
+		background = this.getClass().getResource("/resources/imgs/background.png");
 		imageBackground = new ImageIcon(background).getImage();
 	}
 	
