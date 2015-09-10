@@ -2,13 +2,13 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="/home/omar/jdom-2.0.6(1)/jdom-2.0.6.jar"/>
-	<classpathentry kind="lib" path="/home/omar/jdom-2.0.6(1)/jdom-2.0.6-contrib.jar"/>
-	<classpathentry kind="lib" path="/home/omar/jdom-2.0.6(1)/jdom-2.0.6-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/omar/jdom-2.0.6(1)/jdom-2.0.6-junit.jar"/>
-	<classpathentry kind="lib" path="/home/omar/jdom-2.0.6(1)/jdom-2.0.6-sources.jar"/>
-	<classpathentry kind="lib" path="/home/omar/jdom-2.0.6(1)/lib/jaxen-1.1.6.jar"/>
-	<classpathentry kind="lib" path="/home/omar/jdom-2.0.6(1)/lib/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="/home/omar/jdom-2.0.6(1)/lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="/home/omar/workspace/IEP/lib/jaxen-1.1.6.jar"/>
+	<classpathentry kind="lib" path="/home/omar/workspace/IEP/lib/jdom-2.0.6.jar"/>
+	<classpathentry kind="lib" path="/home/omar/workspace/IEP/lib/jdom-2.0.6-contrib.jar"/>
+	<classpathentry kind="lib" path="/home/omar/workspace/IEP/lib/jdom-2.0.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="/home/omar/workspace/IEP/lib/jdom-2.0.6-junit.jar"/>
+	<classpathentry kind="lib" path="/home/omar/workspace/IEP/lib/jdom-2.0.6-sources.jar"/>
+	<classpathentry kind="lib" path="/home/omar/workspace/IEP/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="/home/omar/workspace/IEP/lib/xml-apis.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
