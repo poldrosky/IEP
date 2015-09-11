@@ -319,11 +319,11 @@ public class LoadFile {
 		}
 	}
 
-	public static void main(String arg[]) {
+	/*public static void main(String arg[]) {
 		File file = new File(
 				"/home/omar/Documents/Trabajo/Investic/ejemploArchivo.xml");
 		LoadFile loadFile = new LoadFile();
 		loadFile.load(file);
-	}
+	}*/
 
 }

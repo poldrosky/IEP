@@ -1,22 +1,12 @@
 package interfaces;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.EventQueue;
-import java.awt.GridLayout;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
 
-import java.awt.Color;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
+
 
 public class IEP extends JFrame {
-
-	private JPanel contentPanel;
 	ImgBackgroud imgBackground;
 	Header header;
 	Projects projects;
@@ -31,13 +21,11 @@ public class IEP extends JFrame {
 		header = new Header();
 		imgBackground = new ImgBackgroud();
 		projects = new Projects();
-
 		Container container = getContentPane();
 		container.setLayout(null);
 		container.add(projects);
 		container.add(imgBackground);
 		container.add(header);
-
 	}
 
 	public static void main(String[] args) {

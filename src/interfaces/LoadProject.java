@@ -55,14 +55,14 @@ public class LoadProject extends JFrame {
 		btnChooseFile.setBounds(270, 55, 114, 22);
 		btnChooseFile.setBackground(new Color(0, 0, 0, 0));
 		btnChooseFile.setIcon(new ImageIcon(IEP.class
-				.getResource("/resources/imgs/chooseFile.png")));
+				.getResource("/imgs/chooseFile.png")));
 		container.add(btnChooseFile);
 
 		JButton btnLoadProject = new JButton("");
 		btnLoadProject.setBounds(240, 150, 183, 50);
 		btnLoadProject.setBackground(new Color(0, 0, 0, 0));
 		btnLoadProject.setIcon(new ImageIcon(IEP.class
-				.getResource("/resources/imgs/loadProject.png")));
+				.getResource("/imgs/loadProject.png")));
 		container.add(btnLoadProject);
 
 		JButton btnClearText = new JButton("");
@@ -74,13 +74,13 @@ public class LoadProject extends JFrame {
 		btnClearText.setBounds(55, 100, 98, 48);
 		btnClearText.setBackground(new Color(0, 0, 0, 0));
 		btnClearText.setIcon(new ImageIcon(IEP.class
-				.getResource("/resources/imgs/clear.png")));
+				.getResource("/imgs/clear.png")));
 		container.add(btnClearText);
 		
 		JLabel lblSquare = new JLabel("");
 		lblSquare.setBounds(0, 0, 456, 272);
 		lblSquare.setIcon(new ImageIcon(IEP.class
-				.getResource("/resources/imgs/IEP22.png")));
+				.getResource("/imgs/IEP22.png")));
 		container.add(lblSquare);
 	}
 }

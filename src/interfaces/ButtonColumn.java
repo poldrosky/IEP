@@ -103,7 +103,7 @@ public class ButtonColumn extends AbstractCellEditor
 	public Component getTableCellEditorComponent(
 		JTable table, Object value, boolean isSelected, int row, int column)
 	{
-		editButton.setIcon(new ImageIcon(IEP.class.getResource("/resources/imgs/GoProject.png"))); 
+		editButton.setIcon(new ImageIcon(IEP.class.getResource("/imgs/GoProject.png"))); 
 		return editButton;
 	}
 
@@ -139,7 +139,7 @@ public class ButtonColumn extends AbstractCellEditor
 			renderButton.setBorder( originalBorder );
 		}
 
-		renderButton.setIcon(new ImageIcon(IEP.class.getResource("/resources/imgs/GoProject.png")));
+		renderButton.setIcon(new ImageIcon(IEP.class.getResource("/imgs/GoProject.png")));
 		renderButton.setBackground(new Color(0,0,0,0));
 
 		return renderButton;
