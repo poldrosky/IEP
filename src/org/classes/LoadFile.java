@@ -21,8 +21,8 @@ public class LoadFile {
 
 	public void load(File xmlFile) {
 
-		ConnectionJdbc conectar = new ConnectionJdbc();
-		boolean correctConnection = conectar.connectToDB();
+		ConnectionJdbc connect = new ConnectionJdbc();
+		boolean correctConnection = connect.connectToDB();
 		if (!correctConnection) {
 			return;
 		}
@@ -55,6 +55,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -77,6 +78,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -100,6 +102,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -123,6 +126,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -146,6 +150,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -169,6 +174,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -192,6 +198,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -215,6 +222,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -238,6 +246,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -263,6 +272,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 
 				tblEntity = new TblEntity();
@@ -277,6 +287,7 @@ public class LoadFile {
 					tblEntity.getValuesList().add("'" + field.getText() + "'");
 				}
 				System.out.println(tblEntity.insert());
+				connect.executeUpdate(tblEntity.insert());
 			}
 
 			// obtener tag Reflecion
@@ -298,6 +309,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -320,6 +332,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -342,6 +355,7 @@ public class LoadFile {
 								"'" + field.getText() + "'");
 					}
 					System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
 				}
 			}
 
@@ -352,13 +366,14 @@ public class LoadFile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		connect.close();
 	}
 
-	public static void main(String arg[]) {
+	/*public static void main(String arg[]) {
 		File file = new File(
 				"/home/omar/Documents/Trabajo/Investic/ejemploArchivo.xml");
 		LoadFile loadFile = new LoadFile();
 		loadFile.load(file);
-	}
+	}*/
 
 }

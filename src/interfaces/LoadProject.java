@@ -12,17 +12,22 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.classes.LoadFile;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
 public class LoadProject extends JFrame {
 
-	private JPanel contentPanel;
 	private JTextArea textRoute;
 	private JFileChooser fc;
+	private File file;
+	public Projects p;
 	
-	public LoadProject() {
+	
+	public LoadProject(Projects p) {
+		this.p=p;
 		setAlwaysOnTop(true);
 		this.setTitle("Cargar Proyecto");
 		this.setResizable(false);
@@ -44,7 +49,7 @@ public class LoadProject extends JFrame {
 				if (e.getSource() == btnChooseFile) {
 		            int returnVal = fc.showOpenDialog(LoadProject.this);
                     if (returnVal == JFileChooser.APPROVE_OPTION) {
-		                File file = fc.getSelectedFile();
+		                file = fc.getSelectedFile();
 		                //This is where a real application would open the file.
 		                textRoute.append(file.getName());
 		                      } 
@@ -59,6 +64,18 @@ public class LoadProject extends JFrame {
 		container.add(btnChooseFile);
 
 		JButton btnLoadProject = new JButton("");
+		btnLoadProject.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//System.out.println(file.getAbsolutePath());				
+				LoadFile loadFile = new LoadFile();
+				loadFile.load(file);
+				
+				dispose();
+				reloadTable();
+				
+				
+			}
+		});
 		btnLoadProject.setBounds(240, 150, 183, 50);
 		btnLoadProject.setBackground(new Color(0, 0, 0, 0));
 		btnLoadProject.setIcon(new ImageIcon(IEP.class
@@ -83,4 +100,8 @@ public class LoadProject extends JFrame {
 				.getResource("/imgs/IEP22.png")));
 		container.add(lblSquare);
 	}
+	public void reloadTable () {
+		p.loadIep();
+	}
+
 }

@@ -20,8 +20,9 @@ public class IEP extends JFrame {
 		this.setLocationRelativeTo(null);
 		header = new Header();
 		imgBackground = new ImgBackgroud();
-		projects = new Projects();
+		projects = new Projects(this);
 		Container container = getContentPane();
+	
 		container.setLayout(null);
 		container.add(projects);
 		container.add(imgBackground);
