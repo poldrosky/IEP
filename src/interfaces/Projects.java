@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import connection.ConnectionJdbc;
+import connection.ConnectionJdbcOffline;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -61,7 +61,7 @@ public class Projects extends JPanel {
 	}
 	
 	public void reloadTable(){
-		ConnectionJdbc connect = new ConnectionJdbc();
+		ConnectionJdbcOffline connect = new ConnectionJdbcOffline();
 		boolean correctConnection = connect.connectToDB();
 		if (!correctConnection) {
 			return;

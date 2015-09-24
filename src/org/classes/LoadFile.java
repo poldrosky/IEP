@@ -10,7 +10,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-import connection.ConnectionJdbc;
+import connection.ConnectionJdbcOffline;
 
 public class LoadFile {
 	private List<?> list;
@@ -21,7 +21,7 @@ public class LoadFile {
 
 	public void load(File xmlFile) {
 
-		ConnectionJdbc connect = new ConnectionJdbc();
+		ConnectionJdbcOffline connect = new ConnectionJdbcOffline();
 		boolean correctConnection = connect.connectToDB();
 		if (!correctConnection) {
 			return;

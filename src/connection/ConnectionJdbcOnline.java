@@ -7,11 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ConnectionJdbcOffline {
-
+public class ConnectionJdbcOnline {
+	
 	private Connection conn = null;
-
-	public ConnectionJdbcOffline() {
+	
+	
+	public ConnectionJdbcOnline() {
 
 	}
 	
@@ -23,11 +24,14 @@ public class ConnectionJdbcOffline {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public final boolean connectToDB() {
 		try {
-			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:resources/db/investic.db");
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			String connectionUrl = "jdbc:sqlserver://investic.udenar.edu.co:1433;" +
+					   "databaseName=Investic;user=user;password=***;";
+			conn = DriverManager.getConnection(connectionUrl);
+			
 			if (conn != null) {
 				System.out.println("Connected to the database");
 				DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
@@ -70,35 +74,25 @@ public class ConnectionJdbcOffline {
 		}
 		return null;  		
 	}
-
+	
+	
 	public Connection getConnection() {
 		return conn;
 	}
 
 	public void setConnection(Connection con) {
 		this.conn= con;
-	}	
-
-	/*public static void main(String[] args) {
-		ConnectionJdbc conectar = new ConnectionJdbc();
+	}
+	
+	public static void main(String[] args) {
+		ConnectionJdbcOnline conectar = new ConnectionJdbcOnline();
 		boolean correctConnection = conectar.connectToDB();
 		if (correctConnection){
 			System.out.println("Esta conectado");
-			ResultSet rs = conectar.resultSet("Select * from tblGrupoInvestigacion");	
-			try {
-				while(rs.next())
-				  {
-				    // read the result set
-				    System.out.println("name = " + rs.getString("Codigo"));
-				    System.out.println("id = " + rs.getInt("id"));
-				  }
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		else{
 			System.out.println("Error de conexion");
-		}		
-		}*/
+		}
+	}
+
 }
