@@ -2,7 +2,15 @@ package interfaces;
 
 import java.awt.Container;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 
 
@@ -10,6 +18,8 @@ public class IEP extends JFrame {
 	ImgBackgroud imgBackground;
 	Header header;
 	Projects projects;
+	private JButton btnNewButton;
+	private JLabel lblLogo;
 
 	public IEP() {
 		super("IEP OFFLINE");
@@ -19,14 +29,31 @@ public class IEP extends JFrame {
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		header = new Header();
+		header.setLocation(0, 0);
 		imgBackground = new ImgBackgroud();
 		projects = new Projects(this);
 		Container container = getContentPane();
 	
 		container.setLayout(null);
+		
+		lblLogo = new JLabel("New label");
+		lblLogo.setBounds(276, 20, 248, 103);
+		lblLogo.setIcon(new ImageIcon(IEP.class.getResource("/imgs/logoInvestic.png")));
+		
+		container.add(lblLogo);
 		container.add(projects);
-		container.add(imgBackground);
+		container.add(imgBackground);		
 		container.add(header);
+	}
+	
+	public void reloadPanel(JPanel panel){
+		getContentPane().removeAll();
+		getContentPane().setLayout(null);
+		getContentPane().add(panel);
+		getContentPane().add(lblLogo);
+		getContentPane().add(imgBackground);
+		getContentPane().add(header);
+		getContentPane().repaint();
 	}
 
 	public static void main(String[] args) {

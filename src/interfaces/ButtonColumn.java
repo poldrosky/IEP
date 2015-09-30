@@ -32,6 +32,7 @@ public class ButtonColumn extends AbstractCellEditor
 	private JButton editButton;
 	private Object editorValue;
 	private boolean isButtonColumnEditor;
+	private IEP iep;
 
 	/**
 	 *  Create the ButtonColumn to be used as a renderer and editor. The
@@ -42,10 +43,10 @@ public class ButtonColumn extends AbstractCellEditor
 	 *  @param action the Action to be invoked when the button is invoked
 	 *  @param column the column to which the button renderer/editor is added
 	 */
-	public ButtonColumn(JTable table, int column)
+	public ButtonColumn(JTable table, int column,IEP iep)
 	{
 		this.table = table;
-		
+		this.iep=iep;
 		renderButton = new JButton();
 		editButton = new JButton();
 		editButton.setFocusPainted( false );
@@ -164,6 +165,8 @@ public class ButtonColumn extends AbstractCellEditor
     public void mouseClicked(MouseEvent e) {
     	row = table.getSelectedRow();
     	System.out.println("Código: "+table.getModel().getValueAt(row, 0));
+    	EditorProject bin=new EditorProject(Integer.parseInt(table.getModel().getValueAt(row, 0).toString()),iep);
+    	iep.reloadPanel(bin);    	
     	}
 	public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}

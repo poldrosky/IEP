@@ -1,9 +1,6 @@
 package interfaces;
 
-
-
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
@@ -19,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
+
 
 public class Projects extends JPanel {
 	private JLabel lblIEP11;
@@ -32,9 +29,8 @@ public class Projects extends JPanel {
     public IEP iep; 
     
 	public Projects(IEP iep) {
-		Projects p=this;
 		this.iep=iep;
-		this.setBounds(50, 100, 700, 406);
+		this.setBounds(50, 130, 700, 406);
 		lblIEP11 = new JLabel("");
 		lblIEP11.setBackground(new Color(0,0,0,0));
 		lblIEP11.setBounds(0, 0, 700, 406);
@@ -107,7 +103,7 @@ public class Projects extends JPanel {
 		table = new JTable(model);
 		table.setBounds(50, 150, 600, 200);
 		
-		buttonColumn = new ButtonColumn(table, 3);
+		buttonColumn = new ButtonColumn(table, 3,iep);
 		buttonColumn.setMnemonic(KeyEvent.VK_D);
 	
 		setLayout(null);
