@@ -142,6 +142,7 @@ public class ButtonColumn extends AbstractCellEditor
 
 		renderButton.setIcon(new ImageIcon(IEP.class.getResource("/imgs/GoProject.png")));
 		renderButton.setBackground(new Color(0,0,0,0));
+		renderButton.setBorder(null);
 
 		return renderButton;
 	}
@@ -165,8 +166,8 @@ public class ButtonColumn extends AbstractCellEditor
     public void mouseClicked(MouseEvent e) {
     	row = table.getSelectedRow();
     	System.out.println("Código: "+table.getModel().getValueAt(row, 0));
-    	EditorProject bin=new EditorProject(Integer.parseInt(table.getModel().getValueAt(row, 0).toString()),iep);
-    	iep.reloadPanel(bin);    	
+    	EditorProject editorProject = new EditorProject(Integer.parseInt(table.getModel().getValueAt(row, 0).toString()),iep);
+    	iep.reloadPanel(editorProject);    	
     	}
 	public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}

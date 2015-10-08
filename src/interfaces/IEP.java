@@ -4,21 +4,15 @@ import java.awt.Container;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-
-
 
 public class IEP extends JFrame {
 	ImgBackgroud imgBackground;
 	Header header;
 	Projects projects;
-	private JButton btnNewButton;
 	private JLabel lblLogo;
 
 	public IEP() {
@@ -36,8 +30,8 @@ public class IEP extends JFrame {
 	
 		container.setLayout(null);
 		
-		lblLogo = new JLabel("New label");
-		lblLogo.setBounds(276, 20, 248, 103);
+		lblLogo = new JLabel("logo");
+		lblLogo.setBounds(276, 0, 248, 103);
 		lblLogo.setIcon(new ImageIcon(IEP.class.getResource("/imgs/logoInvestic.png")));
 		
 		container.add(lblLogo);

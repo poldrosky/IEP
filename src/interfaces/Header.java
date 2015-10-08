@@ -23,21 +23,25 @@ public class Header extends JPanel {
 		btnFace.setBounds(658, 0, 48, 48);
 		btnFace.setBackground(colorBackgroundHeader);
 		btnFace.setIcon(new ImageIcon(Header.class.getResource("/imgs/facebook.png")));
+		btnFace.setBorder(null);
 		
 		btnTwitter = new JButton("");
 		btnTwitter.setBounds(706, 0, 46, 48);
 		btnTwitter.setBackground(colorBackgroundHeader);
 		btnTwitter.setIcon(new ImageIcon(IEP.class.getResource("/imgs/twitter.png")));
+		btnTwitter.setBorder(null);
 		
 		btnYoutube = new JButton("");
 		btnYoutube.setBounds(752, 0, 48, 48);
 		btnYoutube.setBackground(colorBackgroundHeader);
 		btnYoutube.setIcon(new ImageIcon(IEP.class.getResource("/imgs/youtube.png")));		
+		btnYoutube.setBorder(null);
 		
 		btnIEP03 = new JButton("");
 		btnIEP03.setBounds(0, 0, 105, 48);
 		btnIEP03.setBackground(colorBackgroundHeader);
 		btnIEP03.setIcon(new ImageIcon(IEP.class.getResource("/imgs/IEP03.png")));		
+		btnIEP03.setBorder(null);
 		
 		lblIEP04 = new JLabel("");
 		lblIEP04.setBackground(colorBackgroundHeader);

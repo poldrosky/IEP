@@ -24,6 +24,10 @@ public class LoadProject extends JFrame {
 	private JFileChooser fc;
 	private File file;
 	public Projects p;
+	private JButton btnChooseFile;
+	private JButton btnLoadProject;
+	private JButton btnClearText;
+	private JLabel lblSquare;
 	
 	
 	public LoadProject(Projects p) {
@@ -42,7 +46,7 @@ public class LoadProject extends JFrame {
 		container.add(textRoute);
 		textRoute.setColumns(10);
 		
-		final JButton btnChooseFile = new JButton("");
+		btnChooseFile = new JButton("");
 		fc = new JFileChooser();
 		btnChooseFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -61,9 +65,11 @@ public class LoadProject extends JFrame {
 		btnChooseFile.setBackground(new Color(0, 0, 0, 0));
 		btnChooseFile.setIcon(new ImageIcon(IEP.class
 				.getResource("/imgs/chooseFile.png")));
+		btnChooseFile.setBorder(null);
 		container.add(btnChooseFile);
+		
 
-		JButton btnLoadProject = new JButton("");
+		btnLoadProject = new JButton("");
 		btnLoadProject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println(file.getAbsolutePath());				
@@ -80,9 +86,10 @@ public class LoadProject extends JFrame {
 		btnLoadProject.setBackground(new Color(0, 0, 0, 0));
 		btnLoadProject.setIcon(new ImageIcon(IEP.class
 				.getResource("/imgs/loadProject.png")));
+		btnLoadProject.setBorder(null);
 		container.add(btnLoadProject);
 
-		JButton btnClearText = new JButton("");
+		btnClearText = new JButton("");
 		btnClearText.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textRoute.setText("");
@@ -92,9 +99,10 @@ public class LoadProject extends JFrame {
 		btnClearText.setBackground(new Color(0, 0, 0, 0));
 		btnClearText.setIcon(new ImageIcon(IEP.class
 				.getResource("/imgs/clear.png")));
+		btnClearText.setBorder(null);
 		container.add(btnClearText);
 		
-		JLabel lblSquare = new JLabel("");
+		lblSquare = new JLabel("");
 		lblSquare.setBounds(0, 0, 456, 272);
 		lblSquare.setIcon(new ImageIcon(IEP.class
 				.getResource("/imgs/IEP22.png")));

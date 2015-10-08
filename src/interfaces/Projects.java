@@ -30,10 +30,10 @@ public class Projects extends JPanel {
     
 	public Projects(IEP iep) {
 		this.iep=iep;
-		this.setBounds(50, 130, 700, 406);
+		this.setBounds(50, 100, 720, 458);
 		lblIEP11 = new JLabel("");
 		lblIEP11.setBackground(new Color(0,0,0,0));
-		lblIEP11.setBounds(0, 0, 700, 406);
+		lblIEP11.setBounds(0, 0, 720, 458);
 		lblIEP11.setIcon(new ImageIcon(IEP.class.getResource("/imgs/IEP11.png")));
 		
 		lblTablaDeProyectos = new JLabel("Tabla De Proyectos");
@@ -48,10 +48,12 @@ public class Projects extends JPanel {
 		btnLoadProject.setBounds(463, 50, 183, 50);
 		btnLoadProject.setBackground(new Color(0,0,0,0));
 		btnLoadProject.setIcon(new ImageIcon(IEP.class.getResource("/imgs/loadProject.png")));
+		btnLoadProject.setBorder(null);
 		
 		btnGoProject = new JButton("Boton");
 		btnGoProject.setIcon(new ImageIcon(IEP.class.getResource("/imgs/GoProject.png")));
 		reloadTable();
+		btnGoProject.setBorder(null);
 
 				
 	}
