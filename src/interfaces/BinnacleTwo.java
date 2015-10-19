@@ -17,9 +17,8 @@ import javax.swing.JComboBox;
 public class BinnacleTwo extends JPanel {
 	JButton btnNewButton;
 
-	public BinnacleTwo() {
-		
-		this.setBounds(0, 0, 340, 280);		
+	public BinnacleTwo() {		
+		this.setBounds(0, 0, 420, 540);		
 		
 		btnNewButton = new JButton("Esta es otra");
 		btnNewButton.setBounds(116, 118, 117, 25);

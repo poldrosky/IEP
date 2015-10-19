@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import connection.ConnectionJdbcOffline;
 
@@ -22,6 +23,7 @@ public class EditorProject extends JPanel {
 	private PanelHeader panelHeader;
 	private LeftPanel leftPanel;
     private JPanel centerPanel;
+    private JScrollPane scrollCenter;
 	
 	public EditorProject(int id,IEP iep) {
 		this.iep=iep;
@@ -30,13 +32,17 @@ public class EditorProject extends JPanel {
 		this.setBounds(50, 100, 720, 458);
 		
 		panelHeader=new PanelHeader(id);
-		panelHeader.setBounds(25, 25, 650, 77);
+		panelHeader.setBounds(25, 25, 670, 77);
 		
 		leftPanel = new LeftPanel(this);
 		leftPanel.setBounds(30, 110, 225, 300);
 		
 		centerPanel = new JPanel();
-		centerPanel.setBounds(275,110, 400, 340);
+		centerPanel.setBounds(270,110, 420, 340);
+		scrollCenter = new JScrollPane();
+		scrollCenter.add(centerPanel);
+		scrollCenter.setBounds(270,110, 420, 340);
+		scrollCenter.setVisible(true);
 		
 		lblIEP11 = new JLabel("");
 		lblIEP11.setBackground(new Color(0,0,0,0));
@@ -47,16 +53,16 @@ public class EditorProject extends JPanel {
 	
 		
 		setLayout(null);
-		this.add(centerPanel);
+		this.add(scrollCenter);
 		this.add(panelHeader);
 		this.add(leftPanel);
 		this.add(lblIEP11);		
 	}
 	
 	public void  reloadPanel(JPanel panel) {
-		this.centerPanel.removeAll();
-		this.centerPanel.add(panel);
-		this.centerPanel.repaint();
+		this.scrollCenter.removeAll();
+		this.scrollCenter.add(panel);
+		this.scrollCenter.repaint();
 	}
 	
 

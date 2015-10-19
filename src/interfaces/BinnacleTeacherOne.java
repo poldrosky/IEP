@@ -14,7 +14,7 @@ public class BinnacleTeacherOne extends JPanel {
 
 	public BinnacleTeacherOne(EditorProject editor) {
 		this.editor=editor;
-		this.setBounds(0, 0, 340, 280);		
+		this.setBounds(0, 0, 420, 540);		
 		
 		btnForTeacher = new JButton("");
 		btnForTeacher.addActionListener(new ActionListener() {

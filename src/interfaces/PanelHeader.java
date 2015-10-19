@@ -47,11 +47,11 @@ public class PanelHeader extends JPanel {
 			e.printStackTrace();
 		}
 		
-		this.setBounds(0, 0, 650, 77);
+		this.setBounds(0, 0, 670, 77);
 		
 		lblIEP23 = new JLabel("");
 		lblIEP23.setBackground(new Color(0,0,0,0));
-		lblIEP23.setBounds(0, 0, 650, 77);
+		lblIEP23.setBounds(0, 0, 670, 77);
 		lblIEP23.setIcon(new ImageIcon(IEP.class.getResource("/imgs/IEP23.png")));
 		
 		lblNameGroup = new JLabel("Nombre del Grupo: ");
