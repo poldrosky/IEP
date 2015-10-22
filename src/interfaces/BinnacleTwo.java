@@ -1,29 +1,21 @@
 package interfaces;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import connection.ConnectionJdbcOffline;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
 
 public class BinnacleTwo extends JPanel {
-	JButton btnNewButton;
-
-	public BinnacleTwo() {		
-		this.setBounds(0, 0, 420, 540);		
+	
+	public BinnacleTwo(IEP iep){
 		
-		btnNewButton = new JButton("Esta es otra");
-		btnNewButton.setBounds(116, 118, 117, 25);
+		setLayout(null);      
 		
-		setLayout(null);
-		this.add(btnNewButton);
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(95, 70, 117, 25);
+		add(btnNewButton);
 	}
 }

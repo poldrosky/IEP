@@ -2,18 +2,18 @@ package interfaces;
 
 import java.awt.Container;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
 public class IEP extends JFrame {
+	private static final long serialVersionUID = 1L;
 	ImgBackgroud imgBackground;
 	Header header;
 	Projects projects;
 	private JLabel lblLogo;
+	
 
 	public IEP() {
 		super("IEP OFFLINE");
@@ -28,7 +28,6 @@ public class IEP extends JFrame {
 		projects = new Projects(this);
 		Container container = getContentPane();
 	
-		container.setLayout(null);
 		
 		lblLogo = new JLabel("logo");
 		lblLogo.setBounds(276, 0, 248, 103);
@@ -37,7 +36,7 @@ public class IEP extends JFrame {
 		container.add(lblLogo);
 		container.add(projects);
 		container.add(imgBackground);		
-		container.add(header);
+		container.add(header);            
 	}
 	
 	public void reloadPanel(JPanel panel){
@@ -48,7 +47,10 @@ public class IEP extends JFrame {
 		getContentPane().add(imgBackground);
 		getContentPane().add(header);
 		getContentPane().repaint();
+		
 	}
+	
+
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

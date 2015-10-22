@@ -7,10 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import java.awt.GridLayout;
-
 public class Header extends JPanel {
-	
+	private static final long serialVersionUID = 1L;
 	private JButton btnIEP03, btnFace, btnTwitter, btnYoutube;
 	private JLabel lblIEP04;
 	

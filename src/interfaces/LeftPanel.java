@@ -10,9 +10,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class LeftPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JButton btnOne;
 	private JButton btnTwo;
 	private JButton btnThree;
@@ -172,7 +172,7 @@ public class LeftPanel extends JPanel {
 	}
 	
 	public void clickTwo() {
-		BinnacleTwo binnacleTwo=new BinnacleTwo();
+		BinnacleTwo binnacleTwo=new BinnacleTwo(this.editor.getIEP());
 		this.editor.reloadPanel(binnacleTwo);
 	}	
 }

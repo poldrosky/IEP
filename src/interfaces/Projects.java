@@ -19,6 +19,7 @@ import java.sql.SQLException;
 
 
 public class Projects extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JLabel lblIEP11;
     private JLabel lblTablaDeProyectos;
     private JButton btnLoadProject;

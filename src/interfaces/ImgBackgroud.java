@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class ImgBackgroud extends JPanel {
+	private static final long serialVersionUID = 1L;
 	public Image imageBackground;
 	public URL background;
 

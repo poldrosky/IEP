@@ -1,11 +1,17 @@
 package interfaces;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JButton;
+import javax.swing.ScrollPaneConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class BinnacleTeacherTwo extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -19,14 +25,52 @@ public class BinnacleTeacherTwo extends JPanel {
     private JTextArea textAnswerThree;
     private JScrollPane sPAnswerThree;
     private JScrollPane scrollCenter;
-
+    private JPanel panel;
+    private JButton btnSaveInformation;
+    private JButton btnNext;
+    private JButton btnBack;
+    private EditorProject editor;
     
-	public BinnacleTeacherTwo() {
-		this.setBounds(0, 0, 420, 340);
+	public BinnacleTeacherTwo(EditorProject editor) {
+		this.editor=editor;
+		btnSaveInformation = new JButton("");
+		btnSaveInformation.setBounds(220, 280, 197, 40);
+		btnSaveInformation.setBackground(new Color(0,0,0,0));
+		btnSaveInformation.setIcon(new ImageIcon(Header.class.getResource("/imgs/saveInformation.png")));
+		btnSaveInformation.setBorder(null);
+		
+		btnNext = new JButton("");
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clickNext();
+			}
+		});
+		btnNext.setBounds(100, 280, 104, 36);
+		btnNext.setBackground(new Color(0,0,0,0));
+		btnNext.setIcon(new ImageIcon(Header.class.getResource("/imgs/next.png")));
+		btnNext.setBorder(null);
+		
+		btnBack = new JButton("");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBack.setBounds(10, 280, 86, 36);
+		btnBack.setBackground(new Color(0,0,0,0));
+		btnBack.setIcon(new ImageIcon(Header.class.getResource("/imgs/back.png")));
+		btnBack.setBorder(null);
+				
+		panel = new JPanel();
+		panel.setBorder(null);
+		panel.setBounds(0, 0, 420, 260);
+		panel.setPreferredSize(new Dimension(420,450));		
+		
 		scrollCenter = new JScrollPane();
-		scrollCenter.setBounds(0, 0, 420, 530);
-		scrollCenter.setViewportView(this);
-		scrollCenter.getViewport().setView(this);		
+		scrollCenter.setBorder(null);
+		scrollCenter.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollCenter.setBounds(0, 0, 420, 260);
+		scrollCenter.setViewportView(panel);
+		scrollCenter.getViewport().setView(panel);		
 		
 		lblQuestionOne = new JLabel("");
 		lblQuestionOne.setText("<html>1 Dé cuenta del proceso que hubo en su institucion<br>"
@@ -52,22 +96,32 @@ public class BinnacleTeacherTwo extends JPanel {
 		lblQuestionThree = new JLabel(""); 
 		lblQuestionThree.setText("<html>3 Breve reflexión sobre el grupo de investigación, <br>"
 				+ "por parte del Maesto/Coinvestigador</html>");
-		lblQuestionThree.setBounds(2, 300, 390, 100);
+		lblQuestionThree.setBounds(2, 300, 390, 40);
 		
 		textAnswerThree = new JTextArea();
 		sPAnswerThree = new JScrollPane(textAnswerThree);
 		textAnswerThree.setBounds(2, 405, 390, 100);
-		sPAnswerThree.setBounds(2, 405, 390, 100);
+		sPAnswerThree.setBounds(2, 345, 390, 100);
 	
 		setLayout(null);
-		//this.setPreferredSize(new Dimension(420,530));
-		this.add(lblQuestionOne);	
-		this.add(sPAnswerOne);				
-		this.add(lblQuestionTwo);
-		this.add(sPAnswerTwo);
-		this.add(lblQuestionThree);
-		this.add(sPAnswerThree);
+		panel.setLayout(null);
+		panel.add(lblQuestionOne);	
+		panel.add(sPAnswerOne);				
+		panel.add(lblQuestionTwo);
+		panel.add(sPAnswerTwo);
+		panel.add(lblQuestionThree);
+		panel.add(sPAnswerThree);	
+		panel.setSize(editor.getIEP().getSize());
+		this.add(scrollCenter);
+		this.add(btnSaveInformation);		
+		this.add(btnNext);
+		this.add(btnBack);	
+	}
 	
+	
+	public void clickNext() {
+		LeftPanel leftPanel = new LeftPanel(editor);
+		leftPanel.clickTwo();
 	}
 	
 }

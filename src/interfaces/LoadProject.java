@@ -7,11 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-
 import org.classes.LoadFile;
 
 import java.awt.event.ActionListener;
@@ -19,7 +16,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 public class LoadProject extends JFrame {
-
+	private static final long serialVersionUID = 1L;
 	private JTextArea textRoute;
 	private JFileChooser fc;
 	private File file;
