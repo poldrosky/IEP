@@ -49,6 +49,14 @@ public class EditorProject extends JPanel {
 		return this.iep;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public void  reloadPanel(JPanel panel) {
 		this.centerPanel.removeAll();
 		panel.setSize(this.centerPanel.getSize());

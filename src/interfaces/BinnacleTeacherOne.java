@@ -26,13 +26,13 @@ public class BinnacleTeacherOne extends JPanel {
 			}
 		});
 		btnForTeacher.setBackground(new Color(0,0,0,0));
-		btnForTeacher.setIcon(new ImageIcon(BinnacleTeacherOne.class.getResource("/imgs/forTeacher.png")));
+		btnForTeacher.setIcon(new ImageIcon(BinnacleTeacherOne.class.getResource("/imgs/binnacleForTeacher.png")));
 		btnForTeacher.setBounds(50, 72, 247, 77);
 		
 		btnNext = new JButton("");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				clickNext();				
 			}
 		});
 		btnNext.setBounds(100, 280, 104, 36);
@@ -49,6 +49,7 @@ public class BinnacleTeacherOne extends JPanel {
 		btnBack.setBackground(new Color(0,0,0,0));
 		btnBack.setIcon(new ImageIcon(Header.class.getResource("/imgs/back.png")));
 		btnBack.setBorder(null);
+		btnBack.setEnabled(false);
 		
 		setLayout(null);
 		this.add(btnForTeacher);
@@ -59,5 +60,10 @@ public class BinnacleTeacherOne extends JPanel {
 	public void clickForTeacher() {
 		BinnacleTeacherTwo binnacleTeacherTwo = new BinnacleTeacherTwo(editor);
 		this.editor.reloadPanel(binnacleTeacherTwo);
+	}
+	
+	public void clickNext() {
+		LeftPanel leftPanel = new LeftPanel(editor);
+		leftPanel.clickTwo();
 	}
 }

@@ -24,8 +24,7 @@ public class PanelHeader extends JPanel {
 	private JLabel lblTeacher1;
 	private JLabel lblResearchLine1;
 	private JLabel lblNameInstitution1;
-	private String nameGroup;
-	
+	private String nameGroup;	
 	private int id;
 	
 	public PanelHeader(int id) {

@@ -29,7 +29,7 @@ public class ConnectionJdbcOnline {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			String connectionUrl = "jdbc:sqlserver://investic.udenar.edu.co:1433;" +
-					   "databaseName=Investic;user=user;password=***;";
+					   "databaseName=Investic;user=usupla;password=prog*2014;";
 			conn = DriverManager.getConnection(connectionUrl);
 			
 			if (conn != null) {
