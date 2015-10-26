@@ -28,6 +28,7 @@ public class BinnacleTeacherOne extends JPanel {
 		btnForTeacher.setBackground(new Color(0,0,0,0));
 		btnForTeacher.setIcon(new ImageIcon(BinnacleTeacherOne.class.getResource("/imgs/binnacleForTeacher.png")));
 		btnForTeacher.setBounds(50, 72, 247, 77);
+		btnForTeacher.setBorder(null);
 		
 		btnNext = new JButton("");
 		btnNext.addActionListener(new ActionListener() {

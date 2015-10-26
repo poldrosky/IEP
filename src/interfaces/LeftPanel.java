@@ -70,6 +70,11 @@ public class LeftPanel extends JPanel {
 		btnTwo.setBorder(null);
 		
 		btnThree = new JButton("");
+		btnThree.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clickThree();
+			}
+		});
 		btnThree.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -86,6 +91,11 @@ public class LeftPanel extends JPanel {
 		btnThree.setBorder(null);
 		
 		btnFour = new JButton("");
+		btnFour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clickFour();
+			}
+		});
 		btnFour.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -102,6 +112,11 @@ public class LeftPanel extends JPanel {
 		btnFour.setBorder(null);
 		
 		btnFive = new JButton("");
+		btnFive.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clickFive();			
+			}
+		});
 		btnFive.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -118,6 +133,11 @@ public class LeftPanel extends JPanel {
 		btnFive.setBorder(null);
 		
 		btnSix = new JButton("");
+		btnSix.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clickSix();
+			}
+		});
 		btnSix.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -134,6 +154,11 @@ public class LeftPanel extends JPanel {
 		btnSix.setBorder(null);
 		
 		btnSeven = new JButton("");
+		btnSeven.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clickSeven();
+			}
+		});
 		btnSeven.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -150,6 +175,11 @@ public class LeftPanel extends JPanel {
 		btnSeven.setBorder(null);
 		
 		btnAdministration = new JButton("");
+		btnAdministration.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clickUpdateTotal();
+			}
+		});
 		btnAdministration.setBackground(new Color(0,0,0,0));
 		btnAdministration.setBounds(35, 255, 157, 40);
 		btnAdministration.setIcon(new ImageIcon(IEP.class.getResource("/imgs/admon.png")));
@@ -172,7 +202,38 @@ public class LeftPanel extends JPanel {
 	}
 	
 	public void clickTwo() {
-		BinnacleTwo binnacleTwo=new BinnacleTwo(this.editor.getIEP());
+		BinnacleTwo binnacleTwo=new BinnacleTwo(this.editor);
 		this.editor.reloadPanel(binnacleTwo);
-	}	
+	}
+	
+	public void clickThree() {
+		BinnacleThree binnacleThree=new BinnacleThree(this.editor);
+		this.editor.reloadPanel(binnacleThree);
+	}
+	
+	public void clickFour() {
+		BinnacleFour binnacleFour=new BinnacleFour(this.editor);
+		this.editor.reloadPanel(binnacleFour);
+	}
+	
+	public void clickFive() {
+		BinnacleFive binnacleFive=new BinnacleFive(this.editor);
+		this.editor.reloadPanel(binnacleFive);
+	}
+	
+	public void clickSix() {
+		BinnacleSix binnacleSix=new BinnacleSix(this.editor);
+		this.editor.reloadPanel(binnacleSix);
+	}
+	
+	public void clickSeven() {
+		BinnacleSeven binnacleSeven=new BinnacleSeven(this.editor);
+		this.editor.reloadPanel(binnacleSeven);
+	}
+	
+	public void clickUpdateTotal(){
+		//TODO Aqui se actualiza a la version online
+		System.out.println("La actualización tuvo éxito");
+	}
+	
 }

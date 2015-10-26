@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class BinnacleTwo extends JPanel {
+public class BinnacleSeven extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private EditorProject editor;
 	private JButton btnNext;
@@ -17,7 +17,7 @@ public class BinnacleTwo extends JPanel {
     private JButton btnForTeacher;
 	private JButton btnForResearchGroup;
     
-	public BinnacleTwo(EditorProject editor){
+	public BinnacleSeven(EditorProject editor){
 		this.editor=editor;		
 		
 		setLayout(null);      
@@ -25,7 +25,6 @@ public class BinnacleTwo extends JPanel {
 		btnForTeacher = new JButton("");
 		btnForTeacher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				clickForTeacher();
 			}
 		});
 		btnForTeacher.setBackground(new Color(0,0,0,0));
@@ -54,6 +53,7 @@ public class BinnacleTwo extends JPanel {
 		btnNext.setBackground(new Color(0,0,0,0));
 		btnNext.setIcon(new ImageIcon(Header.class.getResource("/imgs/next.png")));
 		btnNext.setBorder(null);
+		btnNext.setEnabled(false);
 		
 		btnBack = new JButton("");
 		btnBack.addActionListener(new ActionListener() {
@@ -80,17 +80,14 @@ public class BinnacleTwo extends JPanel {
 	
 	public void clickNext() {
 		LeftPanel leftPanel = new LeftPanel(editor);
-		leftPanel.clickThree();
+		leftPanel.clickTwo();
 	}
 	
 	public void clickBack() {
 		LeftPanel leftPanel = new LeftPanel(editor);
-		leftPanel.clickOne();
+		leftPanel.clickSix();
 	}
 	
-	public void clickForTeacher(){
-		BinnacleTwoTeacher binnacleTwoTeacher = new BinnacleTwoTeacher(editor);
-		this.editor.reloadPanel(binnacleTwoTeacher);		
-	}	
+	
 	
 }

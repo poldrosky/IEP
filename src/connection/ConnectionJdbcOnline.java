@@ -28,8 +28,8 @@ public class ConnectionJdbcOnline {
 	public final boolean connectToDB() {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			String connectionUrl = "jdbc:sqlserver://investic.udenar.edu.co:1433;" +
-					   "databaseName=Investic;user=usupla;password=prog*2014;";
+			String connectionUrl = "jdbc:sqlserver://localhost;" +
+					   "databaseName=db;user=user;password=pass;";
 			conn = DriverManager.getConnection(connectionUrl);
 			
 			if (conn != null) {

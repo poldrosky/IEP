@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class BinnacleTwo extends JPanel {
+public class BinnacleFive extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private EditorProject editor;
 	private JButton btnNext;
@@ -17,7 +17,7 @@ public class BinnacleTwo extends JPanel {
     private JButton btnForTeacher;
 	private JButton btnForResearchGroup;
     
-	public BinnacleTwo(EditorProject editor){
+	public BinnacleFive(EditorProject editor){
 		this.editor=editor;		
 		
 		setLayout(null);      
@@ -25,7 +25,6 @@ public class BinnacleTwo extends JPanel {
 		btnForTeacher = new JButton("");
 		btnForTeacher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				clickForTeacher();
 			}
 		});
 		btnForTeacher.setBackground(new Color(0,0,0,0));
@@ -80,17 +79,14 @@ public class BinnacleTwo extends JPanel {
 	
 	public void clickNext() {
 		LeftPanel leftPanel = new LeftPanel(editor);
-		leftPanel.clickThree();
+		leftPanel.clickSix();
 	}
 	
 	public void clickBack() {
 		LeftPanel leftPanel = new LeftPanel(editor);
-		leftPanel.clickOne();
+		leftPanel.clickFour();
 	}
 	
-	public void clickForTeacher(){
-		BinnacleTwoTeacher binnacleTwoTeacher = new BinnacleTwoTeacher(editor);
-		this.editor.reloadPanel(binnacleTwoTeacher);		
-	}	
+	
 	
 }
