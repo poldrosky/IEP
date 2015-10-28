@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -64,7 +63,7 @@ public class BinnacleTwoGroup extends JPanel {
 		try {
 			while(rs.next()){
 				questions.add((String) rs.getObject("Pregunta"));
-				idQuestions.add((int) rs.getObject("id"));
+				idQuestions.add((int) rs.getObject("Consecutivo"));
 				//System.out.println(rs.getObject("Pregunta"));				
 			}
 		} catch (SQLException e1) {
@@ -84,27 +83,27 @@ public class BinnacleTwoGroup extends JPanel {
 			
 			String query="UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerOne.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND id="+idQuestions.get(0)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(0)+";";
 			
 			query += "UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerTwo.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND id="+idQuestions.get(1)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(1)+";";
 			
 			query += "UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerThree.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND id="+idQuestions.get(2)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(2)+";";
 			
 			query += "UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerFour.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND id="+idQuestions.get(3)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(3)+";";
 			
 			query += "UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerFive.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND id="+idQuestions.get(4)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(4)+";";
 			
 			query += "UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerSix.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND id="+idQuestions.get(5)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(5)+";";
 			
 			System.out.println(query);
 			
