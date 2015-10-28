@@ -3,7 +3,6 @@ package interfaces;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,7 +10,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
 
 import connection.ConnectionJdbcOffline;
 
@@ -42,7 +40,7 @@ public class BinnacleTeacherTwo extends JPanel {
     private String reflection;
     private String conceptAdvisor;
     private JLabel lblTracing;
-    private JLabel lblTracingText;
+    private JTextArea textConceptAdvisor;
     private JLabel lblRevision;
     private int id;
     
@@ -168,12 +166,10 @@ public class BinnacleTeacherTwo extends JPanel {
 		lblTracing = new JLabel("Seguimiento de la Onda");
 		lblTracing.setBounds(2, 450, 250, 40);
 		
-		Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-		
-		lblTracingText = new JLabel("");
-		lblTracingText.setBounds(2, 495, 250, 80);
-		lblTracingText.setText(conceptAdvisor);
-		lblTracingText.setBorder(border);
+		textConceptAdvisor = new JTextArea("");
+		textConceptAdvisor.setBounds(2, 495, 250, 80);
+		textConceptAdvisor.setText(conceptAdvisor);
+		textConceptAdvisor.setEnabled(false);
 		
 		lblRevision = new JLabel("Revisión");
 		lblRevision.setBounds(300, 450, 90, 40);
@@ -187,7 +183,7 @@ public class BinnacleTeacherTwo extends JPanel {
 		panel.add(lblQuestionThree);
 		panel.add(sPAnswerThree);
 		panel.add(lblTracing);
-		panel.add(lblTracingText);
+		panel.add(textConceptAdvisor);
 		panel.add(lblRevision);
 		panel.setSize(editor.getIEP().getSize());
 		this.add(scrollCenter);

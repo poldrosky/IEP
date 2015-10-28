@@ -23,16 +23,16 @@ public class BinnacleTwoTeacher extends JPanel {
 	private EditorProject editor;
 	private int id;
 	private JLabel lblForTeacher;
-	private JTextArea textAnswerOne;
-	private JScrollPane sPAnswerOne;
-	private JTextArea textAnswerTwo;
-	private JScrollPane sPAnswerTwo;
-	private JTextArea textAnswerThree;
-	private JScrollPane sPAnswerThree;
-	private JTextArea textAnswerReflection;
-	private JScrollPane sPAnswerReflection;
-	private JTextArea textAnswerConcept;
-	private JScrollPane sPAnswerConcept;
+	private JTextArea textInformationOne;
+	private JScrollPane sPInformationOne;
+	private JTextArea textInformationTwo;
+	private JScrollPane sPInformationTwo;
+	private JTextArea textInformationThree;
+	private JScrollPane sPInformationThree;
+	private JTextArea textReflection;
+	private JScrollPane sPReflection;
+	private JTextArea textConcept;
+	private JScrollPane sPConcept;
 	private JScrollPane scrollCenter;
 	private JPanel panel;
 	private JButton btnSaveInformation;
@@ -46,15 +46,15 @@ public class BinnacleTwoTeacher extends JPanel {
 	private String sourceThree;
 	private String reflection;
 	private String conceptAdvisor;
-	private String revision;
+	private Integer revision;
 	private JLabel lblSourceOne;
 	private JLabel lblSourceTwo;
 	private JLabel lblSourceThree;
 	private JLabel lblReflection;
 	private JLabel lblConceptAdvisor;
-	private JTextField txtSourceOne;
-	private JTextField txtSourceTwo;
-	private JTextField txtSourceThree;
+	private JTextField textSourceOne;
+	private JTextField textSourceTwo;
+	private JTextField textSourceThree;
 
 	public BinnacleTwoTeacher(EditorProject editor) {
 		this.editor = editor;
@@ -78,12 +78,11 @@ public class BinnacleTwoTeacher extends JPanel {
 				sourceTwo = (String) rs.getObject("FuenteDos");
 				informationThree = (String) rs.getObject("InformacionTres");
 				sourceThree = (String) rs.getObject("FuenteTres");
-				revision = (String) rs.getObject("Revision");
+				revision = (int) rs.getObject("Revision");
 				conceptAdvisor = (String) rs.getObject("ConceptoAsesor");
 				reflection = (String) rs.getObject("Reflexion");
 			}
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		connect.close();
@@ -97,7 +96,16 @@ public class BinnacleTwoTeacher extends JPanel {
 					return;
 				}
 
-				String query = "Aqui va el Query";
+				String query = "UPDATE tblPreguntaProyectoInvestigacion set "
+						+ "InformacionUno='"+textInformationOne.getText()+"',"
+						+ "FuenteUno='"+textSourceOne.getText()+"',"
+						+ "InformacionDos='"+textInformationTwo.getText()+"',"
+						+ "FuenteDos='"+textSourceTwo.getText()+"',"
+						+ "InformacionTres='"+textInformationThree.getText()+"',"
+						+ "FuenteTres='"+textSourceThree.getText()+"',"
+						+ "Reflexion='"+textReflection.getText()+"'"
+						+ " WHERE idGrupoInvestigacion="+id;
+							
 				System.out.println(query);
 
 				connect.executeUpdate(query);
@@ -150,79 +158,82 @@ public class BinnacleTwoTeacher extends JPanel {
 						+ " ampliar o reformular las preguntas iniciales?</html>");
 		lblForTeacher.setBounds(15, 5, 370, 40);
 
-		textAnswerOne = new JTextArea();
-		sPAnswerOne = new JScrollPane(textAnswerOne);
-		textAnswerOne.setBounds(2, 45, 390, 70);
-		sPAnswerOne.setBounds(2, 45, 390, 70);
-		textAnswerOne.setText(informationOne);
+		textInformationOne = new JTextArea();
+		sPInformationOne = new JScrollPane(textInformationOne);
+		textInformationOne.setBounds(2, 45, 390, 70);
+		sPInformationOne.setBounds(2, 45, 390, 70);
+		textInformationOne.setText(informationOne);
 
 		lblSourceOne = new JLabel("Fuente Uno: ");
 		lblSourceOne.setBounds(2, 120, 95, 30);
 
-		txtSourceOne = new JTextField();
-		txtSourceOne.setBounds(100, 120, 290, 30);
+		textSourceOne = new JTextField();
+		textSourceOne.setBounds(100, 120, 290, 30);
+		textSourceOne.setText(sourceOne);
 		
-		textAnswerTwo = new JTextArea();
-		sPAnswerTwo = new JScrollPane(textAnswerTwo);
-		textAnswerTwo.setBounds(2, 155, 370, 70);
-		sPAnswerTwo.setBounds(2, 155, 370, 70);
-		textAnswerTwo.setText(informationTwo);
+		textInformationTwo = new JTextArea();
+		sPInformationTwo = new JScrollPane(textInformationTwo);
+		textInformationTwo.setBounds(2, 155, 370, 70);
+		sPInformationTwo.setBounds(2, 155, 370, 70);
+		textInformationTwo.setText(informationTwo);
 		
 		lblSourceTwo = new JLabel("Fuente Dos: ");
 		lblSourceTwo.setBounds(2, 230, 95, 30);
 
-		txtSourceTwo = new JTextField();
-		txtSourceTwo.setBounds(100, 230, 290, 30);
+		textSourceTwo = new JTextField();
+		textSourceTwo.setBounds(100, 230, 290, 30);
+		textSourceTwo.setText(sourceTwo);
 
-		textAnswerThree = new JTextArea();
-		sPAnswerThree = new JScrollPane(textAnswerThree);
-		textAnswerThree.setBounds(2, 265, 390, 70);
-		sPAnswerThree.setBounds(2, 265, 390, 70);
-		textAnswerThree.setText(informationThree);
+		textInformationThree = new JTextArea();
+		sPInformationThree = new JScrollPane(textInformationThree);
+		textInformationThree.setBounds(2, 265, 390, 70);
+		sPInformationThree.setBounds(2, 265, 390, 70);
+		textInformationThree.setText(informationThree);
 		
 		lblSourceThree = new JLabel("Fuente Tres: ");
 		lblSourceThree.setBounds(2, 340, 95, 30);
 
-		txtSourceThree = new JTextField();
-		txtSourceThree.setBounds(100, 340, 290, 30);
+		textSourceThree = new JTextField();
+		textSourceThree.setBounds(100, 340, 290, 30);
+		textSourceThree.setText(sourceThree);
 
 		lblReflection = new JLabel("<html>Breve reflexión sobre el desarollo de la bitácora # 2<br>"
 				+ " por parte del Maestro/co-investigador</html>");
 		lblReflection.setBounds(15, 380, 370, 40);		
 		
-		textAnswerReflection = new JTextArea();
-		sPAnswerReflection = new JScrollPane(textAnswerReflection);
-		textAnswerReflection.setBounds(2, 375, 390, 70);
-		sPAnswerReflection.setBounds(2, 425, 390, 70);
-		textAnswerReflection.setText(reflection);
+		textReflection = new JTextArea();
+		sPReflection = new JScrollPane(textReflection);
+		textReflection.setBounds(2, 375, 390, 70);
+		sPReflection.setBounds(2, 425, 390, 70);
+		textReflection.setText(reflection);
 		
 		lblConceptAdvisor = new JLabel("Seguimiento perturbación de la ONDA");
 		lblConceptAdvisor.setBounds(15, 500, 370, 40);
 
-		textAnswerConcept = new JTextArea();
-		sPAnswerConcept = new JScrollPane(textAnswerConcept);
-		textAnswerConcept.setBounds(2, 545, 390, 70);
-		sPAnswerConcept.setBounds(2, 545, 390, 70);
-		textAnswerConcept.setText(conceptAdvisor);
-		textAnswerConcept.setEditable(false);
+		textConcept = new JTextArea();
+		sPConcept = new JScrollPane(textConcept);
+		textConcept.setBounds(2, 545, 390, 70);
+		sPConcept.setBounds(2, 545, 390, 70);
+		textConcept.setText(conceptAdvisor);
+		textConcept.setEditable(false);
 
 		setLayout(null);
 		panel.setLayout(null);
 		panel.add(lblForTeacher);
-		panel.add(sPAnswerOne);
+		panel.add(sPInformationOne);
 		panel.add(lblSourceOne);
-		panel.add(txtSourceOne);
-		panel.add(sPAnswerTwo);
+		panel.add(textSourceOne);
+		panel.add(sPInformationTwo);
 		panel.add(lblSourceTwo);
-		panel.add(txtSourceTwo);
+		panel.add(textSourceTwo);
 		panel.add(lblSourceThree);
-		panel.add(txtSourceThree);
-		panel.add(sPAnswerThree);
+		panel.add(textSourceThree);
+		panel.add(sPInformationThree);
 		panel.add(lblReflection);
-		panel.add(sPAnswerReflection);
+		panel.add(sPReflection);
 		panel.add(lblReflection);
 		panel.add(lblConceptAdvisor);
-		panel.add(sPAnswerConcept);
+		panel.add(sPConcept);
 		panel.setSize(editor.getIEP().getSize());
 		this.add(scrollCenter);
 		this.add(btnSaveInformation);
