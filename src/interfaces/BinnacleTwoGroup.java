@@ -42,7 +42,7 @@ public class BinnacleTwoGroup extends JPanel {
     private JButton btnNext;
     private JButton btnBack;
     private List<String> questions;
-    private List<Integer> idQuestions;
+    private List<Integer> serial;
 	
 	public BinnacleTwoGroup(EditorProject editor) {
 		this.editor=editor;
@@ -58,12 +58,12 @@ public class BinnacleTwoGroup extends JPanel {
 				+ " WHERE idGRupoInvestigacion="+id);
 		
 		questions = new ArrayList<String>();
-		idQuestions = new ArrayList<Integer>();
+		serial = new ArrayList<Integer>();
 		
 		try {
 			while(rs.next()){
 				questions.add((String) rs.getObject("Pregunta"));
-				idQuestions.add((int) rs.getObject("Consecutivo"));
+				serial.add((int) rs.getObject("Consecutivo"));
 				//System.out.println(rs.getObject("Pregunta"));				
 			}
 		} catch (SQLException e1) {
@@ -83,27 +83,27 @@ public class BinnacleTwoGroup extends JPanel {
 			
 			String query="UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerOne.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(0)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+serial.get(0)+";";
 			
 			query += "UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerTwo.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(1)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+serial.get(1)+";";
 			
 			query += "UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerThree.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(2)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+serial.get(2)+";";
 			
 			query += "UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerFour.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(3)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+serial.get(3)+";";
 			
 			query += "UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerFive.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(4)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+serial.get(4)+";";
 			
 			query += "UPDATE tblPreguntaInvestigacion"
 					+ " set Pregunta='"+textAnswerSix.getText()+"'"
-					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+idQuestions.get(5)+";";
+					+ " WHERE idGrupoInvestigacion="+id+" AND Consecutivo="+serial.get(5)+";";
 			
 			System.out.println(query);
 			

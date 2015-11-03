@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
@@ -8,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import connection.ConnectionJdbcOffline;
 
@@ -24,7 +25,6 @@ public class Projects extends JPanel {
     private JLabel lblTablaDeProyectos;
     private JButton btnLoadProject;
     private JButton btnGoProject;
-    private DefaultTableModel model;
     private JTable table;
     private ButtonColumn buttonColumn;
     public IEP iep; 
@@ -53,9 +53,8 @@ public class Projects extends JPanel {
 		
 		btnGoProject = new JButton("Boton");
 		btnGoProject.setIcon(new ImageIcon(IEP.class.getResource("/imgs/GoProject.png")));
-		reloadTable();
 		btnGoProject.setBorder(null);
-
+		reloadTable();
 				
 	}
 	
@@ -65,53 +64,54 @@ public class Projects extends JPanel {
 		if (!correctConnection) {
 			return;
 		}
-		/*Object[][] data = {
-			    {"2020", "Nariño",
-			     "I.E. San Juan Bosco", "Ir al Proyecto"},
-			    {"1964", "Buesaco",
-			     "Colegio Rafael Uribe", "Ir al Proyecto"}			    
-			};*/
 		
+		Object [] columnNames = {"id", "Codigo", "Nombre", "Ir"};
+				
+		ResultSet rs = connect.resultSet("SELECT * FROM tblGrupoInvestigacion");	
 		
-		String[] columnNames = {"id", "Código",
-                "Nombre", "Ir"};
-		
-		ResultSet rs = connect.resultSet("SELECT * FROM tblGrupoInvestigacion");
-		model = new DefaultTableModel();
-		model.setColumnCount(4);
-		model.setColumnIdentifiers(columnNames);
 		
 		int row=0;
-		try {
-			while(rs.next()){
-			    // read the result set
-				Object[] grupo=new Object[4];
-				model.addRow(grupo);
-				model.setValueAt(rs.getObject("id"), row, 0);
-				model.setValueAt(rs.getObject("Codigo"), row, 1);
-				model.setValueAt(rs.getObject("Nombre"), row, 2);
-				model.setValueAt("Ir al Proyecto", row, 3);
+		try {			
+			while(rs.next()){				
 			    row++;
-			    
-			  }
+		  }
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
-
+		Object [] []data= new Object [row][4];	
 		
-		//model = new DefaultTableModel(data, columnNames);
+		rs = connect.resultSet("SELECT * FROM tblGrupoInvestigacion");
+		row=0;
+		try {			
+			while(rs.next()){
+				data[row][0]=rs.getObject("id");
+				data[row][1]=rs.getObject("Codigo");
+				data[row][2]=rs.getObject("Nombre");
+				data[row][3]="Ir al Proyecto";
+			    row++;
+		  }
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
-		table = new JTable(model);
-		table.setBounds(50, 150, 600, 200);
+		table = new JTable(data,columnNames);
+		JTableHeader header = table.getTableHeader();
+				
+		JPanel panel = new JPanel();
+		panel.setBounds(50, 150, 600, 200);
 		
 		buttonColumn = new ButtonColumn(table, 3,iep);
 		buttonColumn.setMnemonic(KeyEvent.VK_D);
 	
 		setLayout(null);
 		this.add(lblTablaDeProyectos);
-		this.add(table);
+		panel.setLayout(new BorderLayout());
+		panel.add(header, BorderLayout.NORTH);
+		panel.add(table, BorderLayout.CENTER);
+		this.add(panel);
 		this.add(btnLoadProject);
 		this.add(lblIEP11);
 		this.updateUI();
@@ -129,6 +129,5 @@ public class Projects extends JPanel {
 		iep.dispose();
 		IEP frame = new IEP();
 		frame.setVisible(true);
-	}
-	
+	}	
 }

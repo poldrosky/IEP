@@ -2,10 +2,14 @@ package interfaces;
 
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -16,11 +20,15 @@ public class BinnacleSix extends JPanel {
     private JButton btnBack;
     private JButton btnForTeacher;
 	private JButton btnForResearchGroup;
+	private JLabel lblTitle;
     
 	public BinnacleSix(EditorProject editor){
-		this.editor=editor;		
+		this.editor=editor;	
 		
-		setLayout(null);      
+		lblTitle = new JLabel("Reflexión de la Onda");
+		lblTitle.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setBounds(20, 20, 370, 30);
 		
 		btnForTeacher = new JButton("");
 		btnForTeacher.addActionListener(new ActionListener() {
@@ -65,7 +73,8 @@ public class BinnacleSix extends JPanel {
 		btnBack.setIcon(new ImageIcon(Header.class.getResource("/imgs/back.png")));
 		btnBack.setBorder(null);
 		
-		
+		setLayout(null);
+		this.add(lblTitle);
 		this.add(btnForTeacher);
 		this.add(btnForResearchGroup);
 		this.add(btnNext);

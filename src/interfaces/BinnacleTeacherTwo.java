@@ -129,7 +129,7 @@ public class BinnacleTeacherTwo extends JPanel {
 		scrollCenter.getViewport().setView(panel);		
 		
 		lblQuestionOne = new JLabel("");
-		lblQuestionOne.setText("<html>1 Dé cuenta del proceso que hubo en su institucion<br>"
+		lblQuestionOne.setText("<html>1 Dé cuenta del proceso que hubo en su institucion"
 				+ "para conformar el grupo de investigación<br></html>");		
 		lblQuestionOne.setBounds(2, 5, 390, 40);
 		lblQuestionOne.setVisible(true);
@@ -141,7 +141,7 @@ public class BinnacleTeacherTwo extends JPanel {
 		textAnswerOne.setText(process);
 		
 		lblQuestionTwo = new JLabel(""); 
-		lblQuestionTwo.setText("<html>2 Explique cuales fueron los motivos  que lo llevaron<br>"
+		lblQuestionTwo.setText("<html>2 Explique cuales fueron los motivos  que lo llevaron"
 				+ "a participar en Ondas");
 		lblQuestionTwo.setBounds(2, 150, 390, 40);
 		
@@ -153,7 +153,7 @@ public class BinnacleTeacherTwo extends JPanel {
 		
 		
 		lblQuestionThree = new JLabel(""); 
-		lblQuestionThree.setText("<html>3 Breve reflexión sobre el grupo de investigación, <br>"
+		lblQuestionThree.setText("<html>3 Breve reflexión sobre el grupo de investigación,"
 				+ "por parte del Maesto/Coinvestigador</html>");
 		lblQuestionThree.setBounds(2, 300, 390, 40);
 		

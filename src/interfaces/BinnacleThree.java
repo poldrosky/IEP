@@ -2,10 +2,14 @@ package interfaces;
 
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -16,15 +20,20 @@ public class BinnacleThree extends JPanel {
     private JButton btnBack;
     private JButton btnForTeacher;
 	private JButton btnForResearchGroup;
+	private JLabel lblTitle;
     
 	public BinnacleThree(EditorProject editor){
-		this.editor=editor;		
+		this.editor=editor;	
 		
-		setLayout(null);      
+		lblTitle = new JLabel("Superposición de Ondas");
+		lblTitle.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setBounds(20, 20, 370, 30);
 		
 		btnForTeacher = new JButton("");
 		btnForTeacher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				clickForTeacher();
 			}
 		});
 		btnForTeacher.setBackground(new Color(0,0,0,0));
@@ -65,7 +74,8 @@ public class BinnacleThree extends JPanel {
 		btnBack.setIcon(new ImageIcon(Header.class.getResource("/imgs/back.png")));
 		btnBack.setBorder(null);
 		
-		
+		setLayout(null);
+		this.add(lblTitle);
 		this.add(btnForTeacher);
 		this.add(btnForResearchGroup);
 		this.add(btnNext);
@@ -73,8 +83,8 @@ public class BinnacleThree extends JPanel {
 	}
 	
 	public void clickForResearchGroup() {
-		BinnacleTwoGroup binnacleTwoGroup = new BinnacleTwoGroup(editor);
-		this.editor.reloadPanel(binnacleTwoGroup);
+		BinnacleThreeGroup binnacleThreeGroup = new BinnacleThreeGroup(editor);
+		this.editor.reloadPanel(binnacleThreeGroup);
 	}
 	
 	public void clickNext() {
@@ -85,6 +95,11 @@ public class BinnacleThree extends JPanel {
 	public void clickBack() {
 		LeftPanel leftPanel = new LeftPanel(editor);
 		leftPanel.clickTwo();
+	}
+	
+	public void clickForTeacher(){
+		BinnacleThreeTeacher binnacleThreeTeacher = new BinnacleThreeTeacher(editor);
+		this.editor.reloadPanel(binnacleThreeTeacher);		
 	}
 	
 	

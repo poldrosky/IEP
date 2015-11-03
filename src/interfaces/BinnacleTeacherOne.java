@@ -2,11 +2,15 @@ package interfaces;
 
 import java.awt.Color;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class BinnacleTeacherOne extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -14,10 +18,16 @@ public class BinnacleTeacherOne extends JPanel {
 	private EditorProject editor;
 	private JButton btnNext;
     private JButton btnBack;
+    private JLabel lblTitle;
 
 	public BinnacleTeacherOne(EditorProject editor) {
 		this.editor=editor;
-		this.setBounds(0, 0, 420, 340);		
+		this.setBounds(0, 0, 420, 340);	
+		
+		lblTitle = new JLabel("Estar en la Onda de Ondas");
+		lblTitle.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setBounds(20, 20, 370, 30);
 		
 		btnForTeacher = new JButton("");
 		btnForTeacher.addActionListener(new ActionListener() {
@@ -53,6 +63,7 @@ public class BinnacleTeacherOne extends JPanel {
 		btnBack.setEnabled(false);
 		
 		setLayout(null);
+		this.add(lblTitle);
 		this.add(btnForTeacher);
 		this.add(btnBack);
 		this.add(btnNext);
