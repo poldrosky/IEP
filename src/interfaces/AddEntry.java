@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionListener;
@@ -32,9 +33,13 @@ public class AddEntry extends JFrame {
 	private JTextField textDescription;
 	private JButton btnAddItem;
 	public BinnacleFour bf;
+	int sizeEntry=0;
+	int entry, id;
 
-	public AddEntry(BinnacleFour bf) {
+	public AddEntry(BinnacleFour bf, EditorProject editor) {
 		this.bf=bf;
+		id = editor.getId();
+		
 		setAlwaysOnTop(true);
 		this.setTitle("Agregar Presupuesto");
 		this.setResizable(false);
@@ -55,16 +60,18 @@ public class AddEntry extends JFrame {
 		}
 
 		
-		ResultSet rsRubro = connect.resultSet("SELECT * FROM tblRubro");
-
+		ResultSet rsEntry = connect.resultSet("SELECT * FROM tblRubro");
+		 		
 		try {
-			while (rsRubro.next()) {
-				comboEntry.addItem(new ComboItem(rsRubro.getInt("id"), rsRubro.getString("Rubro")));				
+			while (rsEntry.next()) {
+				comboEntry.addItem(new ComboItem(rsEntry.getInt("id"), rsEntry.getString("Rubro")));
+				sizeEntry++;
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		connect.close();
 
 		comboEntry.setBounds(75, 60, 400, 20);
 		
@@ -95,8 +102,7 @@ public class AddEntry extends JFrame {
 		
 		btnAddItem = new JButton("");
 		btnAddItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String entry;
+			public void actionPerformed(ActionEvent e) {				
 				float quantity;
 				float unitValue;
 				float total;
@@ -108,17 +114,36 @@ public class AddEntry extends JFrame {
 					return;
 				}
 				
-				//entry = (String) comboEntry.getSelectedItem();
+				for(int i=0;i<=sizeEntry-1;i++){
+					System.out.println(comboEntry.getItemAt(i).getLabel());
+					System.out.println(comboEntry.getSelectedItem().toString());
+					if(comboEntry.getItemAt(i).getLabel().equals(comboEntry.getSelectedItem().toString())){
+						entry = comboEntry.getItemAt(i).getValue();
+					}					
+				}
+				
 				quantity = Float.parseFloat(textQuantity.getText());
 				unitValue = Float.parseFloat(textUnitValue.getText());
 				total = quantity * unitValue;
-				
-				System.out.println(comboEntry.getSelectedItem().toString());
+				description = textDescription.getText();
 				
 				textTotal.setText(String.valueOf(total));
-				//String query = "UPDATE tblPresupuestoProyectoInvestigacion set";
-				//System.out.println(query);
-				//connect.executeUpdate(query);				
+				
+				//System.out.println(comboEntry.getSelectedItem().toString());
+				System.out.println(entry);
+				System.out.println(quantity);
+				System.out.println(unitValue);
+				System.out.println(total);
+				System.out.println(description);
+				
+				String query = "INSERT INTO tblPresupuestoProyectoInvestigacion "
+						+ "(idGRupoInvestigacion, idRubro, DescripcionGasto, "
+						+ "ValorRubro, ValorUnitario, Total)"
+						+ " VALUES ("+id+","+entry+",'"+description+"',"+quantity+","+unitValue+","+total+")";
+				System.out.println(query);
+				connect.executeUpdate(query);
+				dispose();
+				bf.reload();
 			}
 		});
 		btnAddItem.setBounds(150, 195, 127, 50);
@@ -140,5 +165,4 @@ public class AddEntry extends JFrame {
 		container.add(textDescription);
 		container.add(btnAddItem);
 	}
-
 }

@@ -33,6 +33,8 @@ public class BinnacleFour extends JPanel {
 	private JTable table;
 	private JPanel panel;
 	private JButton btnAddEntry;
+	private JPanel panelTable;
+	private JTableHeader header;
 	
 	
 	public BinnacleFour(EditorProject editor) {
@@ -157,9 +159,9 @@ public class BinnacleFour extends JPanel {
 		}
 
 		table = new JTable(data, columnNames);
-		JTableHeader header = table.getTableHeader();
+	    header = table.getTableHeader();
 
-		JPanel panelTable = new JPanel();
+		panelTable = new JPanel();
 		panelTable.setBounds(10, 150, 700, 200);
 
 		setLayout(null);
@@ -181,7 +183,7 @@ public class BinnacleFour extends JPanel {
 	
 	public void addEntry(){
 		BinnacleFour bf=this;
-		AddEntry addEntry = new AddEntry(bf);
+		AddEntry addEntry = new AddEntry(bf, editor);
 		addEntry.setVisible(true);	
 	}
 
@@ -198,6 +200,24 @@ public class BinnacleFour extends JPanel {
 	public void clickBack() {
 		LeftPanel leftPanel = new LeftPanel(editor);
 		leftPanel.clickThree();
+	}
+	
+	public void reload(){
+		this.removeAll();
+		setLayout(null);
+		panel.setLayout(null);
+		panelTable.setLayout(new BorderLayout());
+		panelTable.add(header, BorderLayout.NORTH);
+		panelTable.add(table, BorderLayout.CENTER);
+		panel.add(panelTable);
+		panel.setSize(editor.getIEP().getSize());
+		this.add(scrollCenter);
+		panel.add(lblTitle);
+		panel.add(btnAddEntry);
+		this.add(btnNext);
+		this.add(btnBack);
+		this.add(btnSaveInformation);
+		this.updateUI();
 	}
 
 }

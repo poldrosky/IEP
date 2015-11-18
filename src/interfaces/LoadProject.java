@@ -71,12 +71,9 @@ public class LoadProject extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println(file.getAbsolutePath());				
 				LoadFile loadFile = new LoadFile();
-				loadFile.load(file);
-				
+				loadFile.load(file);				
 				dispose();
-				reloadTable();
-				
-				
+				reloadTable();			
 			}
 		});
 		btnLoadProject.setBounds(240, 150, 183, 50);

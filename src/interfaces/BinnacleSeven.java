@@ -18,9 +18,8 @@ public class BinnacleSeven extends JPanel {
 	private EditorProject editor;
 	private JButton btnNext;
     private JButton btnBack;
-    private JButton btnForTeacher;
-	private JButton btnForResearchGroup;
 	private JLabel lblTitle;
+	private JLabel message;
     
 	public BinnacleSeven(EditorProject editor){
 		this.editor=editor;		
@@ -29,27 +28,6 @@ public class BinnacleSeven extends JPanel {
 		lblTitle.setFont(new Font("Dialog", Font.BOLD, 20));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(20, 20, 370, 30);
-		
-		btnForTeacher = new JButton("");
-		btnForTeacher.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnForTeacher.setBackground(new Color(0,0,0,0));
-		btnForTeacher.setBorder(null);
-		btnForTeacher.setIcon(new ImageIcon(BinnacleTeacherOne.class.getResource("/imgs/forTeacher.png")));
-		btnForTeacher.setBounds(100, 140, 198, 70);
-		
-		btnForResearchGroup = new JButton("");
-		btnForResearchGroup.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				clickForResearchGroup();
-			}
-		});
-		btnForResearchGroup.setBackground(new Color(0,0,0,0));
-		btnForResearchGroup.setBorder(null);
-		btnForResearchGroup.setIcon(new ImageIcon(BinnacleTeacherOne.class.getResource("/imgs/forResearchGroup.png")));
-		btnForResearchGroup.setBounds(100, 50, 194, 70);
 		
 		btnNext = new JButton("");
 		btnNext.addActionListener(new ActionListener() {
@@ -73,18 +51,16 @@ public class BinnacleSeven extends JPanel {
 		btnBack.setBackground(new Color(0,0,0,0));
 		btnBack.setIcon(new ImageIcon(Header.class.getResource("/imgs/back.png")));
 		btnBack.setBorder(null);
+	
+		message = new JLabel("<html>Este componente unicamente puede ser<br>"
+				+ " modificado en la verion Online.");
+		message.setBounds(20, 62, 334, 78);
 		
 		setLayout(null);
 		this.add(lblTitle);
-		this.add(btnForTeacher);
-		this.add(btnForResearchGroup);
 		this.add(btnNext);
-		this.add(btnBack);
-	}
-	
-	public void clickForResearchGroup() {
-		BinnacleTwoGroup binnacleTwoGroup = new BinnacleTwoGroup(editor);
-		this.editor.reloadPanel(binnacleTwoGroup);
+		this.add(btnBack);		
+		this.add(message);
 	}
 	
 	public void clickNext() {
@@ -96,7 +72,4 @@ public class BinnacleSeven extends JPanel {
 		LeftPanel leftPanel = new LeftPanel(editor);
 		leftPanel.clickSix();
 	}
-	
-	
-	
 }
