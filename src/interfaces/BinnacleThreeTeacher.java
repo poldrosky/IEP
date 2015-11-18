@@ -38,7 +38,7 @@ public class BinnacleThreeTeacher extends JPanel {
     private String how;
     private String reflection;
     private String conceptAdvisor;
-    private Integer revision;
+    //private Integer revision;
 	
 	public BinnacleThreeTeacher(EditorProject editor) {
 		this.editor=editor;
@@ -58,7 +58,7 @@ public class BinnacleThreeTeacher extends JPanel {
 				how = (String) rs.getObject("Como");
 				reflection = (String) rs.getObject("Reflexion");
 				conceptAdvisor = (String) rs.getObject("ConceptoAsesor");
-				revision = (int) rs.getObject("Revision");
+				//revision = (int) rs.getObject("Revision");
 				//System.out.println(rs.getObject("Pregunta"));				
 			}
 		} catch (SQLException e1) {

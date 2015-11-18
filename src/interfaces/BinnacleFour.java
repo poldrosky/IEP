@@ -18,6 +18,7 @@ import connection.ConnectionJdbcOffline;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -27,7 +28,6 @@ public class BinnacleFour extends JPanel {
 	private JButton btnNext;
 	private JButton btnBack;
 	private JLabel lblTitle;
-	private JButton btnSaveInformation;
 	private JScrollPane scrollCenter;
 	private Integer id;
 	private JTable table;
@@ -35,6 +35,7 @@ public class BinnacleFour extends JPanel {
 	private JButton btnAddEntry;
 	private JPanel panelTable;
 	private JTableHeader header;
+	private DeleteEntry deleteEntry;
 	
 	
 	public BinnacleFour(EditorProject editor) {
@@ -82,29 +83,11 @@ public class BinnacleFour extends JPanel {
 				.getResource("/imgs/addEntry.png")));
 		btnAddEntry.setBorder(null);
 		
-		btnSaveInformation = new JButton("");
-		btnSaveInformation.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ConnectionJdbcOffline connect = new ConnectionJdbcOffline();
-				boolean correctConnection = connect.connectToDB();
-				if (!correctConnection) {
-					return;
-				}
-
-				String query = "UPDATE tblPresupuestoProyectoInvestigacion set";
-				System.out.println(query);
-				connect.executeUpdate(query);
-			}
-		});
-		btnSaveInformation.setBounds(220, 280, 197, 40);
-		btnSaveInformation.setBackground(new Color(0,0,0,0));
-		btnSaveInformation.setIcon(new ImageIcon(Header.class.getResource("/imgs/saveInformation.png")));
-		btnSaveInformation.setBorder(null);
-
+		
 		panel = new JPanel();
 		panel.setBorder(null);
 		panel.setBounds(0, 0, 420, 260);
-		panel.setPreferredSize(new Dimension(710, 600));
+		panel.setPreferredSize(new Dimension(1000, 600));
 
 		scrollCenter = new JScrollPane();
 		scrollCenter.setBorder(null);
@@ -112,7 +95,7 @@ public class BinnacleFour extends JPanel {
 		scrollCenter.setViewportView(panel);
 		scrollCenter.getViewport().setView(panel);
 
-		String[] columnNames = { "Rubro", "DescripcionGasto", "Cantidad",
+		String[] columnNames = { "id","Rubro", "DescripcionGasto", "Cantidad",
 				"Vl Unitario", "Total", "Eliminar" };
 
 		ConnectionJdbcOffline connect = new ConnectionJdbcOffline();
@@ -136,7 +119,7 @@ public class BinnacleFour extends JPanel {
 			e1.printStackTrace();
 		}
 
-		Object[][] data = new Object[row][6];
+		Object[][] data = new Object[row][7];
 
 		rs = connect
 				.resultSet("SELECT * FROM tblPresupuestoProyectoInvestigacion "
@@ -145,12 +128,13 @@ public class BinnacleFour extends JPanel {
 		row = 0;
 		try {
 			while (rs.next()) {
-				data[row][0] = rs.getObject("Rubro");
-				data[row][1] = rs.getObject("DescripcionGasto");
-				data[row][2] = rs.getObject("ValorRubro");
-				data[row][3] = rs.getObject("ValorUnitario");
-				data[row][4] = rs.getObject("Total");
-				data[row][5] = "Eliminar";
+				data[row][0] = rs.getInt("id");
+				data[row][1] = rs.getObject("Rubro");
+				data[row][2] = rs.getObject("DescripcionGasto");
+				data[row][3] = rs.getObject("ValorRubro");
+				data[row][4] = rs.getObject("ValorUnitario");
+				data[row][5] = rs.getObject("Total");
+				data[row][6] = "Eliminar";
 				row++;
 			}
 		} catch (SQLException e1) {
@@ -160,9 +144,12 @@ public class BinnacleFour extends JPanel {
 
 		table = new JTable(data, columnNames);
 	    header = table.getTableHeader();
+	    
+	    deleteEntry = new DeleteEntry(table, 6, editor);
+	    deleteEntry.setMnemonic(KeyEvent.VK_D);
 
 		panelTable = new JPanel();
-		panelTable.setBounds(10, 150, 700, 200);
+		panelTable.setBounds(10, 150, 1000, 200);
 
 		setLayout(null);
 		panel.setLayout(null);
@@ -177,7 +164,6 @@ public class BinnacleFour extends JPanel {
 		panel.add(btnAddEntry);
 		this.add(btnNext);
 		this.add(btnBack);
-		this.add(btnSaveInformation);
 		this.updateUI();
 	}
 	
@@ -201,23 +187,4 @@ public class BinnacleFour extends JPanel {
 		LeftPanel leftPanel = new LeftPanel(editor);
 		leftPanel.clickThree();
 	}
-	
-	public void reload(){
-		this.removeAll();
-		setLayout(null);
-		panel.setLayout(null);
-		panelTable.setLayout(new BorderLayout());
-		panelTable.add(header, BorderLayout.NORTH);
-		panelTable.add(table, BorderLayout.CENTER);
-		panel.add(panelTable);
-		panel.setSize(editor.getIEP().getSize());
-		this.add(scrollCenter);
-		panel.add(lblTitle);
-		panel.add(btnAddEntry);
-		this.add(btnNext);
-		this.add(btnBack);
-		this.add(btnSaveInformation);
-		this.updateUI();
-	}
-
 }

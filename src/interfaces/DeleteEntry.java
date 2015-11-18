@@ -2,9 +2,12 @@ package interfaces;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
+
+import connection.ConnectionJdbcOffline;
 
 /**
  *  The ButtonColumn class provides a renderer and an editor that looks like a
@@ -19,7 +22,7 @@ import javax.swing.table.*;
  *  the model row number of the button that was clicked.
  *
  */
-public class ButtonColumn extends AbstractCellEditor
+public class DeleteEntry extends AbstractCellEditor
 	implements TableCellRenderer, TableCellEditor, ActionListener, MouseListener
 {
 	private static final long serialVersionUID = 1L;
@@ -33,7 +36,7 @@ public class ButtonColumn extends AbstractCellEditor
 	private JButton editButton;
 	private Object editorValue;
 	private boolean isButtonColumnEditor;
-	private IEP iep;
+	private EditorProject editor;
 
 	/**
 	 *  Create the ButtonColumn to be used as a renderer and editor. The
@@ -44,10 +47,10 @@ public class ButtonColumn extends AbstractCellEditor
 	 *  @param action the Action to be invoked when the button is invoked
 	 *  @param column the column to which the button renderer/editor is added
 	 */
-	public ButtonColumn(JTable table, int column,IEP iep)
+	public DeleteEntry(JTable table, int column,EditorProject editor)
 	{
 		this.table = table;
-		this.iep=iep;
+		this.editor=editor;
 		renderButton = new JButton();
 		editButton = new JButton();
 		editButton.setFocusPainted( false );
@@ -105,7 +108,7 @@ public class ButtonColumn extends AbstractCellEditor
 	public Component getTableCellEditorComponent(
 		JTable table, Object value, boolean isSelected, int row, int column)
 	{
-		editButton.setIcon(new ImageIcon(IEP.class.getResource("/imgs/GoProject.png"))); 
+		editButton.setIcon(new ImageIcon(IEP.class.getResource("/imgs/trash.png"))); 
 		return editButton;
 	}
 
@@ -141,7 +144,7 @@ public class ButtonColumn extends AbstractCellEditor
 			renderButton.setBorder( originalBorder );
 		}
 
-		renderButton.setIcon(new ImageIcon(IEP.class.getResource("/imgs/GoProject.png")));
+		renderButton.setIcon(new ImageIcon(IEP.class.getResource("/imgs/trash.png")));
 		renderButton.setBackground(new Color(0,0,0,0));
 		renderButton.setBorder(null);
 
@@ -166,9 +169,23 @@ public class ButtonColumn extends AbstractCellEditor
 
     public void mouseClicked(MouseEvent e) {
     	row = table.getSelectedRow();
-    	System.out.println("Código: "+table.getModel().getValueAt(row, 0));
-    	EditorProject editorProject = new EditorProject(Integer.parseInt(table.getModel().getValueAt(row, 0).toString()),iep);
-    	iep.reloadPanel(editorProject);    	
+    	System.out.println("id: "+table.getModel().getValueAt(row, 0));
+    	
+    	String query = "DELETE FROM tblPresupuestoProyectoInvestigacion WHERE id="
+    			+ table.getModel().getValueAt(row, 0)+" AND idGrupoInvestigacion="+ editor.getId();
+    	
+    	ConnectionJdbcOffline connect = new ConnectionJdbcOffline();
+    	boolean correctConnection = connect.connectToDB();
+		if (!correctConnection) {
+			return;
+		}	
+    	connect.executeUpdate(query);
+    	connect.close();
+    	
+    	BinnacleFour binnacleFour=new BinnacleFour(editor);
+		editor.reloadPanel(binnacleFour);
+    	//EditorProject editorProject = new EditorProject(Integer.parseInt(table.getModel().getValueAt(row, 0).toString()),editor);
+    	//editor.reloadPanel(editorProject);    	
     	}
 	public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}

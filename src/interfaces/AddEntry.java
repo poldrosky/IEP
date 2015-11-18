@@ -1,6 +1,5 @@
 package interfaces;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionListener;
@@ -143,7 +142,8 @@ public class AddEntry extends JFrame {
 				System.out.println(query);
 				connect.executeUpdate(query);
 				dispose();
-				bf.reload();
+				BinnacleFour binnacleFour=new BinnacleFour(editor);
+				editor.reloadPanel(binnacleFour);
 			}
 		});
 		btnAddItem.setBounds(150, 195, 127, 50);

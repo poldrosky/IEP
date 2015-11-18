@@ -46,7 +46,7 @@ public class BinnacleTwoTeacher extends JPanel {
 	private String sourceThree;
 	private String reflection;
 	private String conceptAdvisor;
-	private Integer revision;
+	//private Integer revision;
 	private JLabel lblSourceOne;
 	private JLabel lblSourceTwo;
 	private JLabel lblSourceThree;
@@ -78,7 +78,7 @@ public class BinnacleTwoTeacher extends JPanel {
 				sourceTwo = (String) rs.getObject("FuenteDos");
 				informationThree = (String) rs.getObject("InformacionTres");
 				sourceThree = (String) rs.getObject("FuenteTres");
-				revision = (int) rs.getObject("Revision");
+				//revision = (int) rs.getObject("Revision");
 				conceptAdvisor = (String) rs.getObject("ConceptoAsesor");
 				reflection = (String) rs.getObject("Reflexion");
 			}
