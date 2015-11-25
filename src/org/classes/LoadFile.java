@@ -36,6 +36,60 @@ public class LoadFile {
 			Element rootNode = document.getRootElement();
 			// System.out.println(document.getDocument().getRootElement());
 
+			// obtener informacion
+			list = rootNode.getChildren("InFormacion");
+			for (int i = 0; i < list.size(); i++) {
+				element = (Element) list.get(i);
+				tbl = element.getChildren("investic.dbo.tblGrupoInvestigacion");
+				tblEntity = new TblEntity();
+				tblEntity.setTable("tblInformacion");
+
+				for (int j = 0; j < tbl.size(); j++) {
+					Element tblTabla = (Element) tbl.get(j);
+					fields = tblTabla.getChildren();
+					for (int z = 0; z < fields.size() - 1; z++) {
+						Element field = (Element) fields.get(z);
+						tblEntity.getAtributesList().add(field.getName());
+						tblEntity.getValuesList().add(
+								"'" + field.getText() + "'");
+					}
+				}
+
+				Element tblTabla = (Element) fields.get(fields.size() - 1);
+				fields = tblTabla.getChildren();
+				for (int z = 0; z < fields.size() - 1; z++) {
+					Element field = (Element) fields.get(z);
+					tblEntity.getAtributesList().add(field.getName());
+					tblEntity.getValuesList().add("'" + field.getText() + "'");
+				}
+
+				tblTabla = (Element) fields.get(fields.size() - 1);
+				fields = tblTabla.getChildren();
+				for (int z = 0; z < fields.size() - 1; z++) {
+					Element field = (Element) fields.get(z);
+					tblEntity.getAtributesList().add(field.getName());
+					tblEntity.getValuesList().add("'" + field.getText() + "'");
+				}
+
+				tblTabla = (Element) fields.get(fields.size() - 1);
+				fields = tblTabla.getChildren();
+				for (int z = 0; z < fields.size() - 1; z++) {
+					Element field = (Element) fields.get(z);
+					tblEntity.getAtributesList().add(field.getName());
+					tblEntity.getValuesList().add("'" + field.getText() + "'");
+				}
+
+				tblTabla = (Element) fields.get(fields.size() - 1);
+				fields = tblTabla.getChildren();
+				for (int z = 0; z < fields.size(); z++) {
+					Element field = (Element) fields.get(z);
+					tblEntity.getAtributesList().add(field.getName());
+					tblEntity.getValuesList().add("'" + field.getText() + "'");
+				}
+				// System.out.println(tblEntity.insert());
+				connect.executeUpdate(tblEntity.insert());
+			}
+
 			// obtener tag Grupos
 			list = rootNode.getChildren("Grupos");
 			for (int i = 0; i < list.size(); i++) {
@@ -54,7 +108,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
@@ -77,7 +131,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
@@ -101,7 +155,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
@@ -112,10 +166,10 @@ public class LoadFile {
 				element = (Element) list.get(i);
 				tbl = element
 						.getChildren("investic.dbo.tblPreguntaInvestigacion");
-				tblEntity = new TblEntity();
-				tblEntity.setTable("tblPreguntaInvestigacion");
 
 				for (int j = 0; j < tbl.size(); j++) {
+					tblEntity = new TblEntity();
+					tblEntity.setTable("tblPreguntaInvestigacion");
 					Element tblTabla = (Element) tbl.get(j);
 					// System.out.println(tblTabla);
 					fields = tblTabla.getChildren();
@@ -125,7 +179,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
@@ -149,7 +203,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
@@ -173,7 +227,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
@@ -184,10 +238,10 @@ public class LoadFile {
 				element = (Element) list.get(i);
 				tbl = element
 						.getChildren("investic.dbo.tblPresupuestoProyectoInvestigacion");
-				tblEntity = new TblEntity();
-				tblEntity.setTable("tblPresupuestoProyectoInvestigacion");
 
 				for (int j = 0; j < tbl.size(); j++) {
+					tblEntity = new TblEntity();
+					tblEntity.setTable("tblPresupuestoProyectoInvestigacion");
 					Element tblTabla = (Element) tbl.get(j);
 					// System.out.println(tblTabla);
 					fields = tblTabla.getChildren();
@@ -197,7 +251,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
@@ -221,7 +275,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
@@ -245,7 +299,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
@@ -271,7 +325,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 
@@ -286,7 +340,7 @@ public class LoadFile {
 					tblEntity.getAtributesList().add(field.getName());
 					tblEntity.getValuesList().add("'" + field.getText() + "'");
 				}
-				System.out.println(tblEntity.insert());
+				// System.out.println(tblEntity.insert());
 				connect.executeUpdate(tblEntity.insert());
 			}
 
@@ -308,7 +362,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
@@ -331,7 +385,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
@@ -354,7 +408,7 @@ public class LoadFile {
 						tblEntity.getValuesList().add(
 								"'" + field.getText() + "'");
 					}
-					System.out.println(tblEntity.insert());
+					// System.out.println(tblEntity.insert());
 					connect.executeUpdate(tblEntity.insert());
 				}
 			}
