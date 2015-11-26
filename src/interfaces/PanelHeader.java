@@ -24,23 +24,31 @@ public class PanelHeader extends JPanel {
 	private JLabel lblTeacher1;
 	private JLabel lblResearchLine1;
 	private JLabel lblNameInstitution1;
-	private String nameGroup;	
-	private int id;
+	private String nameGroup;
+	private String nameInstitution;
+	private String nameLinea;
+	private String firstNameTeacher;
+	private String lastNameTeacher;
+	private String municipality;
 	
-	public PanelHeader(int id) {
-		this.id=id;
-		
+	
+	public PanelHeader(int id) {		
 		ConnectionJdbcOffline connectOffline = new ConnectionJdbcOffline();
 		boolean correctConnection = connectOffline.connectToDB();
 		if (!correctConnection) {
 			return;
 		}
 		
-		ResultSet rs = connectOffline.resultSet("SELECT * FROM tblGrupoInvestigacion WHERE id="+id);
+		ResultSet rs = connectOffline.resultSet("SELECT * FROM tblInformacion WHERE idGrupo="+id);
 		
 		try {
 			while(rs.next()){
-				nameGroup = rs.getString(3);
+				nameGroup = rs.getString("Grupo");
+				nameInstitution = rs.getString("Sede");
+				nameLinea= rs.getString("Linea");
+				firstNameTeacher = rs.getString("NombreMaestro");
+				lastNameTeacher = rs.getString("ApellidoMaestro");
+				municipality = rs.getString("Municipio");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -73,21 +81,21 @@ public class PanelHeader extends JPanel {
 		lblNameGroup1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblNameGroup1.setBounds(155, 5, 150, 15);
 		
-		lblMunicipality1 = new JLabel("Pasto ");
+		lblMunicipality1 = new JLabel(municipality);
 		lblMunicipality1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblMunicipality1.setBounds(95, 30, 150, 15);
 		
-		lblTeacher1 = new JLabel("Omar Ernesto Cabrera Rosero ");
+		lblTeacher1 = new JLabel(firstNameTeacher+" "+lastNameTeacher);
 		lblTeacher1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblTeacher1.setBounds(95, 55, 200, 15);
 		
-		lblResearchLine1 = new JLabel("Línea de ");
+		lblResearchLine1 = new JLabel(nameLinea);
 		lblResearchLine1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lblResearchLine1.setBounds(495, 5, 200, 15);
 		
-		lblNameInstitution1 = new JLabel("Liceo ");
+		lblNameInstitution1 = new JLabel(nameInstitution);
 		lblNameInstitution1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblNameInstitution1.setBounds(455, 30, 150, 15);
+		lblNameInstitution1.setBounds(440, 30, 200, 15);
 		
 		setLayout(null);
 		this.add(lblNameGroup);

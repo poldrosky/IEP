@@ -232,8 +232,8 @@ public class LeftPanel extends JPanel {
 	}
 	
 	public void clickUpdateTotal(){
-		//TODO Aqui se actualiza a la version online
-		System.out.println("La actualización tuvo éxito");
+		Administration admin = new Administration(this.editor);
+		admin.setVisible(true);
 	}
 	
 }
