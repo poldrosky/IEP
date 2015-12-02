@@ -93,9 +93,9 @@ public class Administration extends JFrame {
 				try {
 					ResultSetMetaData rsmd = rs.getMetaData();
 					int columnCount = rsmd.getColumnCount();
-					for (int i = 1; i < columnCount + 1; i++ ) {
-						  nameBOne.add(rsmd.getColumnName(i));
-					}				
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBOne.add(rsmd.getColumnName(i));
+					}
 					while (rs.next()) {
 						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 							bOne.add(rs.getString(i));
@@ -113,8 +113,8 @@ public class Administration extends JFrame {
 				try {
 					ResultSetMetaData rsmd = rs.getMetaData();
 					int columnCount = rsmd.getColumnCount();
-					for (int i = 1; i < columnCount + 1; i++ ) {
-						  nameBTwoGroup.add(rsmd.getColumnName(i));
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBTwoGroup.add(rsmd.getColumnName(i));
 					}
 					while (rs.next()) {
 						bTwoList = new ArrayList<String>();
@@ -134,8 +134,8 @@ public class Administration extends JFrame {
 				try {
 					ResultSetMetaData rsmd = rs.getMetaData();
 					int columnCount = rsmd.getColumnCount();
-					for (int i = 1; i < columnCount + 1; i++ ) {
-						  nameBTwoTeacher.add(rsmd.getColumnName(i));
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBTwoTeacher.add(rsmd.getColumnName(i));
 					}
 					while (rs.next()) {
 						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
@@ -153,8 +153,8 @@ public class Administration extends JFrame {
 				try {
 					ResultSetMetaData rsmd = rs.getMetaData();
 					int columnCount = rsmd.getColumnCount();
-					for (int i = 1; i < columnCount + 1; i++ ) {
-						  nameBThreeGroup.add(rsmd.getColumnName(i));
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBThreeGroup.add(rsmd.getColumnName(i));
 					}
 					while (rs.next()) {
 						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
@@ -174,8 +174,8 @@ public class Administration extends JFrame {
 				try {
 					ResultSetMetaData rsmd = rs.getMetaData();
 					int columnCount = rsmd.getColumnCount();
-					for (int i = 1; i < columnCount + 1; i++ ) {
-						  nameBThreeTeacher.add(rsmd.getColumnName(i));
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBThreeTeacher.add(rsmd.getColumnName(i));
 					}
 					while (rs.next()) {
 						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
@@ -193,8 +193,8 @@ public class Administration extends JFrame {
 				try {
 					ResultSetMetaData rsmd = rs.getMetaData();
 					int columnCount = rsmd.getColumnCount();
-					for (int i = 1; i < columnCount + 1; i++ ) {
-						  nameBFour.add(rsmd.getColumnName(i));
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBFour.add(rsmd.getColumnName(i));
 					}
 					while (rs.next()) {
 						bFourList = new ArrayList<String>();
@@ -213,8 +213,8 @@ public class Administration extends JFrame {
 				try {
 					ResultSetMetaData rsmd = rs.getMetaData();
 					int columnCount = rsmd.getColumnCount();
-					for (int i = 1; i < columnCount + 1; i++ ) {
-						  nameBSix.add(rsmd.getColumnName(i));
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBSix.add(rsmd.getColumnName(i));
 					}
 					while (rs.next()) {
 						bSixList = new ArrayList<String>();
@@ -226,37 +226,105 @@ public class Administration extends JFrame {
 				} catch (SQLException e1) {
 					System.err.println("Error: " + e1.getMessage());
 				}
+
+				query = "DELETE FROM tblReflexionProyectoInvestigacion WHERE idGrupoInvestigacion="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM tblPreguntaInvestigacion WHERE idGrupoInvestigacion="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM tblPreguntaProyectoInvestigacion WHERE idGrupoInvestigacion="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM tblProblemaInvestigacion WHERE idGrupoInvestigacion="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM tblProblemaProyectoInvestigacion WHERE idGrupoInvestigacion="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM tblPresupuestoProyectoInvestigacion WHERE idGrupoInvestigacion="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM tblReflexionOnda WHERE idGrupoInvestigacion="
+						+ id + ";\n";
+
+				// connectOffline.executeUpdate(query);
+				String query1 = "INSERT INTO tblReflexionProyectoInvestigacion"
+						+ " (" + nameBOne.toString().replaceAll("\\[|\\]", "")
+						+ ") VALUES ("
+						+ bOne.toString().replaceAll("\\[|\\]", "'").replace(",", "','") + ");\n";
+
+				String query2 = "";
+				for (List<String> bt : bTwoGroup) {
+					query2 = query2
+							+ "INSERT INTO tblPreguntaInvestigacion"
+							+ " ("
+							+ nameBTwoGroup.toString()
+									.replaceAll("\\[|\\]", "") + ") VALUES ("
+							+ bt.toString().replaceAll("\\[|\\]", "'").replace(",", "','") + ");\n";
+				}
+
+				String query3 = "INSERT INTO tblPreguntaProyectoInvestigacion"
+						+ " ("
+						+ nameBTwoTeacher.toString().replaceAll("\\[|\\]", "")
+						+ ") VALUES ("
+						+ bTwoTeacher.toString().replaceAll("\\[|\\]", "'").replace(",", "','")
+						+ ");\n";
+
+				String query4 = "INSERT INTO tblProblemaInvestigacion" + " ("
+						+ nameBThreeGroup.toString().replaceAll("\\[|\\]", "")
+						+ ") VALUES ("
+						+ bThreeGroup.toString().replaceAll("\\[|\\]", "'").replace(",", "','")
+						+ ");\n";
+
+				String query5 = "INSERT INTO tblProblemaProyectoInvestigacion"
+						+ " ("
+						+ nameBThreeTeacher.toString()
+								.replaceAll("\\[|\\]", "") + ") VALUES ("
+						+ bThreeTeacher.toString().replaceAll("\\[|\\]", "'").replace(",", "','")
+						+ ");\n";
+
+				String query6 = "";
+				for (List<String> bt : bFour) {
+					query6 = query6
+							+ "INSERT INTO tblPresupuestoProyectoInvestigacion"
+							+ " ("
+							+ nameBFour.toString().replaceAll("\\[|\\]", "")
+							+ ") VALUES ("
+							+ bt.toString().replaceAll("\\[|\\]", "'").replace(",", "','") + ");\n";
+				}
+
+				String query7 = "";
+				for (List<String> bt : bSix) {
+					query7 = query7
+							+ "INSERT INTO tblReflexionOnda"
+							+ " ("
+							+ nameBSix.toString().replaceAll("\\[|\\]", "")
+							+ ") VALUES ("
+							+ bt.toString().replaceAll("\\[|\\]", "'").replace(",", "','") + ");\n";
+				}
+
+				/*System.out.println(query);
+				System.out.println(query1);
+				System.out.println(query2);
+				System.out.println(query3);
+				System.out.println(query4);
+				System.out.println(query5);
+				System.out.println(query6);
+				System.out.println(query7);*/
 				
-				query = "DELETE FROM tblReflexionProyectoInvestigacion WHERE idGrupoInvestigacion="+id+";"
-						+ "DELETE FROM tblPreguntaInvestigacion WHERE idGrupoInvestigacion="+id+";"
-						+ "DELETE FROM tblPreguntaProyectoInvestigacion WHERE idGrupoInvestigacion="+id+";"
-						+ "DELETE FROM tblProblemaInvestigacion WHERE idGrupoInvestigacion="+id+";"
-						+ "DELETE FROM tblProblemaProyectoInvestigacion WHERE idGrupoInvestigacion="+id+";"
-						+ "DELETE FROM tblPresupuestoProyectoInvestigacion WHERE idGrupoInvestigacion="+id+";"
-						+ "DELETE FROM tblReflexionOnda WHERE idGrupoInvestigacion="+id+";";
+				String queryFinal = query + query1 + query2 +query3 + query4 + query5 
+						+ query6 + query7;
+
+				//System.out.println(queryFinal);
 				
-				connectOffline.executeUpdate(query);						
-				
-				System.out.println(nameBOne);
-				System.out.println("B1"+bOne);
-				System.out.println(nameBTwoGroup);
-				System.out.println("B2A"+bTwoGroup);
-				System.out.println(nameBTwoTeacher);
-				System.out.println("B2B"+bTwoTeacher);
-				System.out.println(nameBThreeGroup);
-				System.out.println("B3A"+bThreeGroup);
-				System.out.println(nameBThreeTeacher);
-				System.out.println("B3B"+bThreeTeacher);
-				System.out.println(nameBFour);
-				System.out.println("B4"+bFour);
-				System.out.println(nameBSix);
-				System.out.println("B6"+bSix);
+				connectOffline.executeUpdate(queryFinal);
 				
 				connectOffline.close();
 				connectOnline.close();
 			}
 		});
-		
+
 		download.setBounds(70, 90, 197, 40);
 
 		JButton upload = new JButton("Subir");
