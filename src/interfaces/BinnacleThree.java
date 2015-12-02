@@ -100,8 +100,5 @@ public class BinnacleThree extends JPanel {
 	public void clickForTeacher(){
 		BinnacleThreeTeacher binnacleThreeTeacher = new BinnacleThreeTeacher(editor);
 		this.editor.reloadPanel(binnacleThreeTeacher);		
-	}
-	
-	
-	
+	}	
 }

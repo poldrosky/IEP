@@ -20,7 +20,6 @@ public class LoadFile {
 	private TblEntity tblEntity;
 
 	public void load(File xmlFile) {
-
 		ConnectionJdbcOffline connect = new ConnectionJdbcOffline();
 		boolean correctConnection = connect.connectToDB();
 		if (!correctConnection) {
@@ -170,6 +169,30 @@ public class LoadFile {
 				for (int j = 0; j < tbl.size(); j++) {
 					tblEntity = new TblEntity();
 					tblEntity.setTable("tblPreguntaInvestigacion");
+					Element tblTabla = (Element) tbl.get(j);
+					// System.out.println(tblTabla);
+					fields = tblTabla.getChildren();
+					for (int z = 0; z < fields.size(); z++) {
+						Element field = (Element) fields.get(z);
+						tblEntity.getAtributesList().add(field.getName());
+						tblEntity.getValuesList().add(
+								"'" + field.getText() + "'");
+					}
+					// System.out.println(tblEntity.insert());
+					connect.executeUpdate(tblEntity.insert());
+				}
+			}
+
+			// obtener tag Perturbacion Maestro
+			list = rootNode.getChildren("PerturbacionMaestro");
+			for (int i = 0; i < list.size(); i++) {
+				element = (Element) list.get(i);
+				tbl = element
+						.getChildren("investic.dbo.tblPreguntaProyectoInvestigacion");
+
+				for (int j = 0; j < tbl.size(); j++) {
+					tblEntity = new TblEntity();
+					tblEntity.setTable("tblPreguntaProyectoInvestigacion");
 					Element tblTabla = (Element) tbl.get(j);
 					// System.out.println(tblTabla);
 					fields = tblTabla.getChildren();
@@ -423,11 +446,10 @@ public class LoadFile {
 		connect.close();
 	}
 
-	/*public static void main(String arg[]) {
-		File file = new File(
-				"/home/omar/Documents/Trabajo/Investic/ejemploArchivo.xml");
-		LoadFile loadFile = new LoadFile();
-		loadFile.load(file);
-	}*/
+	/*
+	 * public static void main(String arg[]) { File file = new File(
+	 * "/home/omar/Documents/Trabajo/Investic/ejemploArchivo.xml"); LoadFile
+	 * loadFile = new LoadFile(); loadFile.load(file); }
+	 */
 
 }

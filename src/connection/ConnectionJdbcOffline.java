@@ -10,17 +10,27 @@ import java.sql.Statement;
 public class ConnectionJdbcOffline {
 
 	private Connection conn = null;
+	Statement stmt;
 
 	public ConnectionJdbcOffline() {
 
 	}
 	
-	public void close(){
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void close() {
+		System.out.println("Close connection");
+		if (stmt != null) {
+			try {
+				stmt.close();
+			} catch (Exception e) {
+				System.err.println("Error: " + e.getMessage());
+			}
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				System.err.println("Error: " + e.getMessage());
+			}
 		}
 	}
 
@@ -28,6 +38,7 @@ public class ConnectionJdbcOffline {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			conn = DriverManager.getConnection("jdbc:sqlite:resources/db/investic.db");
+			stmt = conn.createStatement();
 			if (conn != null) {
 				System.out.println("Connected to the database");
 				DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
@@ -46,26 +57,22 @@ public class ConnectionJdbcOffline {
 	}
 	
 	public void executeUpdate(String query){
-		Statement statement;
 		try {
-			statement = conn.createStatement();
-			statement.setQueryTimeout(30); 
-			statement.executeUpdate(query);
+			stmt.setQueryTimeout(10); 
+			stmt.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.err.println("Error: " + e.getMessage());
 			e.printStackTrace();
 		}  		
 	}
 	
 	public  ResultSet resultSet(String query){
-		Statement statement;
-		try {
-			statement = conn.createStatement();
-			statement.setQueryTimeout(30); 
-			ResultSet rs = statement.executeQuery(query);
+		try {			
+			stmt.setQueryTimeout(10); 
+			ResultSet rs = stmt.executeQuery(query);
 		    return rs;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.err.println("Error: " + e.getMessage());
 			e.printStackTrace();
 		}
 		return null;  		
