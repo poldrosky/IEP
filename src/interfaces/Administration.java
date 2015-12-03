@@ -250,9 +250,11 @@ public class Administration extends JFrame {
 
 				// connectOffline.executeUpdate(query);
 				String query1 = "INSERT INTO tblReflexionProyectoInvestigacion"
-						+ " (" + nameBOne.toString().replaceAll("\\[|\\]", "")
+						+ " ("
+						+ nameBOne.toString().replaceAll("\\[|\\]", "")
 						+ ") VALUES ("
-						+ bOne.toString().replaceAll("\\[|\\]", "'").replace(",", "','") + ");\n";
+						+ bOne.toString().replaceAll("\\[|\\]", "'")
+								.replace(",", "','") + ");\n";
 
 				String query2 = "";
 				for (List<String> bt : bTwoGroup) {
@@ -260,29 +262,33 @@ public class Administration extends JFrame {
 							+ "INSERT INTO tblPreguntaInvestigacion"
 							+ " ("
 							+ nameBTwoGroup.toString()
-									.replaceAll("\\[|\\]", "") + ") VALUES ("
-							+ bt.toString().replaceAll("\\[|\\]", "'").replace(",", "','") + ");\n";
+									.replaceAll("\\[|\\]", "")
+							+ ") VALUES ("
+							+ bt.toString().replaceAll("\\[|\\]", "'")
+									.replace(",", "','") + ");\n";
 				}
 
 				String query3 = "INSERT INTO tblPreguntaProyectoInvestigacion"
 						+ " ("
 						+ nameBTwoTeacher.toString().replaceAll("\\[|\\]", "")
 						+ ") VALUES ("
-						+ bTwoTeacher.toString().replaceAll("\\[|\\]", "'").replace(",", "','")
-						+ ");\n";
+						+ bTwoTeacher.toString().replaceAll("\\[|\\]", "'")
+								.replace(",", "','") + ");\n";
 
-				String query4 = "INSERT INTO tblProblemaInvestigacion" + " ("
+				String query4 = "INSERT INTO tblProblemaInvestigacion"
+						+ " ("
 						+ nameBThreeGroup.toString().replaceAll("\\[|\\]", "")
 						+ ") VALUES ("
-						+ bThreeGroup.toString().replaceAll("\\[|\\]", "'").replace(",", "','")
-						+ ");\n";
+						+ bThreeGroup.toString().replaceAll("\\[|\\]", "'")
+								.replace(",", "','") + ");\n";
 
 				String query5 = "INSERT INTO tblProblemaProyectoInvestigacion"
 						+ " ("
 						+ nameBThreeTeacher.toString()
-								.replaceAll("\\[|\\]", "") + ") VALUES ("
-						+ bThreeTeacher.toString().replaceAll("\\[|\\]", "'").replace(",", "','")
-						+ ");\n";
+								.replaceAll("\\[|\\]", "")
+						+ ") VALUES ("
+						+ bThreeTeacher.toString().replaceAll("\\[|\\]", "'")
+								.replace(",", "','") + ");\n";
 
 				String query6 = "";
 				for (List<String> bt : bFour) {
@@ -291,7 +297,8 @@ public class Administration extends JFrame {
 							+ " ("
 							+ nameBFour.toString().replaceAll("\\[|\\]", "")
 							+ ") VALUES ("
-							+ bt.toString().replaceAll("\\[|\\]", "'").replace(",", "','") + ");\n";
+							+ bt.toString().replaceAll("\\[|\\]", "'")
+									.replace(",", "','") + ");\n";
 				}
 
 				String query7 = "";
@@ -301,25 +308,49 @@ public class Administration extends JFrame {
 							+ " ("
 							+ nameBSix.toString().replaceAll("\\[|\\]", "")
 							+ ") VALUES ("
-							+ bt.toString().replaceAll("\\[|\\]", "'").replace(",", "','") + ");\n";
+							+ bt.toString().replaceAll("\\[|\\]", "'")
+									.replace(",", "','") + ");\n";
 				}
 
-				/*System.out.println(query);
-				System.out.println(query1);
-				System.out.println(query2);
-				System.out.println(query3);
-				System.out.println(query4);
-				System.out.println(query5);
-				System.out.println(query6);
-				System.out.println(query7);*/
-				
-				String queryFinal = query + query1 + query2 +query3 + query4 + query5 
-						+ query6 + query7;
+				/*
+				 * System.out.println(query); System.out.println(query1);
+				 * System.out.println(query2); System.out.println(query3);
+				 * System.out.println(query4); System.out.println(query5);
+				 * System.out.println(query6); System.out.println(query7);
+				 */
 
-				//System.out.println(queryFinal);
-				
+				String queryFinal = query + query1 + query2 + query3 + query4
+						+ query5 + query6 + query7;
+
+				// System.out.println(queryFinal);
+
+				try {
+					connectOffline.getConnection().setAutoCommit(false);
+				} catch (SQLException e1) {
+					System.err.println("Error: " + e1.getMessage());
+					e1.printStackTrace();
+				}
+
 				connectOffline.executeUpdate(queryFinal);
-				
+				try {
+					connectOffline.getConnection().commit();
+					connectOffline.getConnection().setAutoCommit(true);
+					JOptionPane.showMessageDialog(null,
+							"Se ha sincronizado correctamente");
+					dispose();
+				} catch (SQLException e1) {
+					try {
+						connectOffline.getConnection().rollback();
+						JOptionPane.showMessageDialog(null,
+								"Ocurrio un error, revise su conexión",
+								"Error de sincronización",
+								JOptionPane.ERROR_MESSAGE);
+					} catch (SQLException e2) {
+						System.err.println("Error: " + e2.getMessage());
+						e2.printStackTrace();
+					}
+					e1.printStackTrace();
+				}
 				connectOffline.close();
 				connectOnline.close();
 			}
@@ -330,8 +361,298 @@ public class Administration extends JFrame {
 		JButton upload = new JButton("Subir");
 		upload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ConnectionJdbcOnline connectOnline = new ConnectionJdbcOnline();
+				ConnectionJdbcOffline connectOffline = new ConnectionJdbcOffline();
+				boolean correctConnectionOnline = connectOnline.connectToDB();
+				boolean correctConnectionOffline = connectOffline.connectToDB();
+				if (!correctConnectionOnline || !correctConnectionOffline) {
+					JOptionPane.showMessageDialog(null,
+							"No hay conexión a Internet", "Error de conexión",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				String query = "SELECT * FROM tblReflexionProyectoInvestigacion "
+						+ "WHERE idGrupoInvestigacion =" + id;
+				ResultSet rs = connectOffline.resultSet(query);
+
+				try {
+					ResultSetMetaData rsmd = rs.getMetaData();
+					int columnCount = rsmd.getColumnCount();
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBOne.add(rsmd.getColumnName(i));
+					}
+					while (rs.next()) {
+						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+							bOne.add(rs.getString(i));
+						}
+					}
+				} catch (SQLException e1) {
+					System.err.println("Error: " + e1.getMessage());
+					e1.printStackTrace();
+				}
+
+				query = "SELECT * FROM tblPreguntaInvestigacion "
+						+ "WHERE idGrupoInvestigacion =" + id;
+				rs = connectOffline.resultSet(query);
+
+				try {
+					ResultSetMetaData rsmd = rs.getMetaData();
+					int columnCount = rsmd.getColumnCount();
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBTwoGroup.add(rsmd.getColumnName(i));
+					}
+					while (rs.next()) {
+						bTwoList = new ArrayList<String>();
+						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+							bTwoList.add(rs.getString(i));
+						}
+						bTwoGroup.add(bTwoList);
+					}
+				} catch (SQLException e1) {
+					System.err.println("Error: " + e1.getMessage());
+				}
+
+				query = "SELECT * FROM tblPreguntaProyectoInvestigacion "
+						+ "WHERE idGrupoInvestigacion =" + id;
+				rs = connectOffline.resultSet(query);
+
+				try {
+					ResultSetMetaData rsmd = rs.getMetaData();
+					int columnCount = rsmd.getColumnCount();
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBTwoTeacher.add(rsmd.getColumnName(i));
+					}
+					while (rs.next()) {
+						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+							bTwoTeacher.add(rs.getString(i));
+						}
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+
+				query = "SELECT * FROM tblProblemaInvestigacion "
+						+ "WHERE idGrupoInvestigacion =" + id;
+				rs = connectOffline.resultSet(query);
+
+				try {
+					ResultSetMetaData rsmd = rs.getMetaData();
+					int columnCount = rsmd.getColumnCount();
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBThreeGroup.add(rsmd.getColumnName(i));
+					}
+					while (rs.next()) {
+						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+							bThreeGroup.add(rs.getString(i));
+						}
+
+					}
+				} catch (SQLException e1) {
+					System.err.println("Error: " + e1.getMessage());
+					e1.printStackTrace();
+				}
+
+				query = "SELECT * FROM tblProblemaProyectoInvestigacion "
+						+ "WHERE idGrupoInvestigacion =" + id;
+				rs = connectOffline.resultSet(query);
+
+				try {
+					ResultSetMetaData rsmd = rs.getMetaData();
+					int columnCount = rsmd.getColumnCount();
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBThreeTeacher.add(rsmd.getColumnName(i));
+					}
+					while (rs.next()) {
+						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+							bThreeTeacher.add(rs.getString(i));
+						}
+					}
+				} catch (SQLException e1) {
+					System.err.println("Error: " + e1.getMessage());
+					e1.printStackTrace();
+				}
+
+				query = "SELECT * FROM tblPresupuestoProyectoInvestigacion "
+						+ "WHERE idGrupoInvestigacion =" + id;
+				rs = connectOffline.resultSet(query);
+				try {
+					ResultSetMetaData rsmd = rs.getMetaData();
+					int columnCount = rsmd.getColumnCount();
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBFour.add(rsmd.getColumnName(i));
+					}
+					while (rs.next()) {
+						bFourList = new ArrayList<String>();
+						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+							bFourList.add(rs.getString(i));
+						}
+						bFour.add(bFourList);
+					}
+				} catch (SQLException e1) {
+					System.err.println("Error: " + e1.getMessage());
+				}
+
+				query = "SELECT * FROM tblReflexionOnda "
+						+ "WHERE idGrupoInvestigacion =" + id;
+				rs = connectOffline.resultSet(query);
+				try {
+					ResultSetMetaData rsmd = rs.getMetaData();
+					int columnCount = rsmd.getColumnCount();
+					for (int i = 1; i < columnCount + 1; i++) {
+						nameBSix.add(rsmd.getColumnName(i));
+					}
+					while (rs.next()) {
+						bSixList = new ArrayList<String>();
+						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+							bSixList.add(rs.getString(i));
+						}
+						bSix.add(bSixList);
+					}
+				} catch (SQLException e1) {
+					System.err.println("Error: " + e1.getMessage());
+				}
+
+				query = "DELETE FROM [investic].[dbo].[tblReflexionProyectoInvestigacion] WHERE [idGrupoInvestigacion]="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM [investic].[dbo].[tblPreguntaInvestigacion] WHERE [idGrupoInvestigacion]="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM [investic].[dbo].[tblPreguntaProyectoInvestigacion] WHERE [idGrupoInvestigacion]="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM [investic].[dbo].[tblProblemaInvestigacion] WHERE [idGrupoInvestigacion]="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM [investic].[dbo].[tblProblemaProyectoInvestigacion] WHERE [idGrupoInvestigacion]="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM [investic].[dbo].[tblPresupuestoProyectoInvestigacion] WHERE [idGrupoInvestigacion]="
+						+ id
+						+ ";\n"
+						+ "DELETE FROM [investic].[dbo].[tblReflexionOnda] WHERE [idGrupoInvestigacion]="
+						+ id + ";\n";
+
+				// connectOffline.executeUpdate(query);
+				String query1 = "SET IDENTITY_INSERT [investic].[dbo].[tblReflexionProyectoInvestigacion] ON;";
+				query1 += "INSERT INTO [investic].[dbo].[tblReflexionProyectoInvestigacion]"
+						+ " ("
+						+ nameBOne.toString().replaceAll("\\[|\\]", "")
+						+ ") VALUES ("
+						+ bOne.toString().replaceAll("\\[|\\]", "'")
+								.replace(", ", "','").replace("null","") + ");\n";
+				query1 +="SET IDENTITY_INSERT [investic].[dbo].[tblReflexionProyectoInvestigacion] OFF;";
+
+				String query2 = "SET IDENTITY_INSERT [investic].[dbo].[tblPreguntaInvestigacion] ON;";
+				for (List<String> bt : bTwoGroup) {
+					query2 = query2
+							+ "INSERT INTO [investic].[dbo].[tblPreguntaInvestigacion]"
+							+ " ("
+							+ nameBTwoGroup.toString()
+									.replaceAll("\\[|\\]", "")
+							+ ") VALUES ("
+							+ bt.toString().replaceAll("\\[|\\]", "'")
+									.replace(", ", "','").replace("null","") + ");\n";
+				}
+				query2+= "SET IDENTITY_INSERT [investic].[dbo].[tblPreguntaInvestigacion] OFF;";
+
+				String query3 = "SET IDENTITY_INSERT [investic].[dbo].[tblPreguntaProyectoInvestigacion] ON;";
+				query3+="INSERT INTO [investic].[dbo].[tblPreguntaProyectoInvestigacion]"
+						+ " ("
+						+ nameBTwoTeacher.toString().replaceAll("\\[|\\]", "")
+						+ ") VALUES ("
+						+ bTwoTeacher.toString().replaceAll("\\[|\\]", "'")
+								.replace(", ", "','").replace("null","") + ");\n";
+				query3+="SET IDENTITY_INSERT [investic].[dbo].[tblPreguntaProyectoInvestigacion] OFF;";
+
+				String query4 = "SET IDENTITY_INSERT [investic].[dbo].[tblProblemaInvestigacion] ON;";
+				query4 += "INSERT INTO [investic].[dbo].[tblProblemaInvestigacion]"
+						+ " ("
+						+ nameBThreeGroup.toString().replaceAll("\\[|\\]", "")
+						+ ") VALUES ("
+						+ bThreeGroup.toString().replaceAll("\\[|\\]", "'")
+								.replace(", ", "','").replace("null","") + ");\n";
+				query4 += "SET IDENTITY_INSERT [investic].[dbo].[tblProblemaInvestigacion] OFF;";
+
+				String query5 = "SET IDENTITY_INSERT [investic].[dbo].[tblProblemaProyectoInvestigacion] ON;";
+				query5 += "INSERT INTO [investic].[dbo].[tblProblemaProyectoInvestigacion]"
+						+ " ("
+						+ nameBThreeTeacher.toString()
+								.replaceAll("\\[|\\]", "")
+						+ ") VALUES ("
+						+ bThreeTeacher.toString().replaceAll("\\[|\\]", "'")
+								.replace(", ", "','").replace("null","") + ");\n";
+				query5 += "SET IDENTITY_INSERT [investic].[dbo].[tblProblemaProyectoInvestigacion] OFF;";
+
+				String query6 = "SET IDENTITY_INSERT [investic].[dbo].[tblPresupuestoProyectoInvestigacion] ON;";
+				for (List<String> bt : bFour) {
+					query6 = query6
+							+ "INSERT INTO [investic].[dbo].[tblPresupuestoProyectoInvestigacion]"
+							+ " ("
+							+ nameBFour.toString().replaceAll("\\[|\\]", "")
+							+ ") VALUES ("
+							+ bt.toString().replaceAll("\\[|\\]", "'")
+									.replace(", ", "','").replace("null","") + ");\n";
+				}
+				query6 += "SET IDENTITY_INSERT [investic].[dbo].[tblPresupuestoProyectoInvestigacion] OFF;";
+
+				String query7 = "SET IDENTITY_INSERT [investic].[dbo].[tblReflexionOnda] ON;";
+				for (List<String> bt : bSix) {
+					query7 = query7
+							+ "INSERT INTO [investic].[dbo].[tblReflexionOnda]"
+							+ " ("
+							+ nameBSix.toString().replaceAll("\\[|\\]", "")
+							+ ") VALUES ("
+							+ bt.toString().replaceAll("\\[|\\]", "'")
+									.replace(", ", "','").replace("null","") + ");\n";
+				}
+				query7 += "SET IDENTITY_INSERT [investic].[dbo].[tblReflexionOnda] OFF;";
+
+				/*
+				 * System.out.println(query); System.out.println(query1);
+				 * System.out.println(query2); System.out.println(query3);
+				 * System.out.println(query4); System.out.println(query5);
+				 * System.out.println(query6); System.out.println(query7);
+				 */
+
+				String queryFinal = query + query1 + query2 + query3 + query4
+						+ query5 + query6 + query7;
+
+				//System.out.println(queryFinal);
+				connectOnline.executeUpdate(queryFinal);
+				try {
+					connectOnline.getConnection().setAutoCommit(false);
+				} catch (SQLException e1) {
+					System.err.println("Error: " + e1.getMessage());
+					e1.printStackTrace();
+				}
+
+				connectOnline.executeUpdate(queryFinal);
+				try {
+					connectOnline.getConnection().commit();
+					connectOnline.getConnection().setAutoCommit(true);
+					JOptionPane.showMessageDialog(null,
+							"Se ha sincronizado correctamente");
+					dispose();
+				} catch (SQLException e1) {
+					try {
+						connectOnline.getConnection().rollback();
+						JOptionPane.showMessageDialog(null,
+								"Ocurrio un error, revise su conexión",
+								"Error de sincronización",
+								JOptionPane.ERROR_MESSAGE);
+					} catch (SQLException e2) {
+						System.err.println("Error: " + e2.getMessage());
+						e2.printStackTrace();
+					}
+					e1.printStackTrace();
+				}
+				connectOffline.close();
+				connectOnline.close();
 			}
 		});
+		
 		upload.setBounds(70, 135, 197, 40);
 
 		Container container = getContentPane();
