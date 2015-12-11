@@ -1,11 +1,14 @@
 package interfaces;
 
+import java.awt.Color;
 import java.awt.Container;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import java.awt.Font;
 
@@ -13,6 +16,7 @@ import javax.swing.JButton;
 
 import connection.ConnectionJdbcOffline;
 import connection.ConnectionJdbcOnline;
+import credencial.Credencial;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -27,6 +31,8 @@ public class Administration extends JFrame {
 	int id;
 	private JLabel lblAdmin;
 	private JLabel lblPassword;
+	private JLabel lblUser;
+	private JTextField textUser;
 	private JPasswordField textPassword;
 
 	// variables binnacle one
@@ -60,19 +66,27 @@ public class Administration extends JFrame {
 		setAlwaysOnTop(true);
 		this.setTitle("Administración");
 		this.setResizable(false);
-		this.setBounds(0, 0, 327, 228);
+		this.setBounds(0, 0, 327, 250);
 
 		lblAdmin = new JLabel("Administración");
 		lblAdmin.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblAdmin.setBounds(55, 12, 202, 36);
+		lblAdmin.setBounds(55, 10, 202, 36);
+		
+		lblUser = new JLabel("Usuario: ");
+		lblUser.setBounds(30, 55, 92, 10);
+		
+		textUser = new JTextField();
+		textUser.setBounds(125, 55, 130, 20);
 
 		lblPassword = new JLabel("Contraseña: ");
-		lblPassword.setBounds(20, 60, 92, 20);
+		lblPassword.setBounds(30, 85, 92, 20);
 
 		textPassword = new JPasswordField();
-		textPassword.setBounds(115, 60, 130, 20);
+		textPassword.setBounds(125, 85, 130, 20);
 
-		JButton download = new JButton("Descargar");
+		JButton download = new JButton("");
+		download.setIcon(new ImageIcon(Administration.class.getResource("/imgs/download.png")));
+		download.setBackground(new Color(0,0,0,0));
 		download.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConnectionJdbcOnline connectOnline = new ConnectionJdbcOnline();
@@ -84,6 +98,15 @@ public class Administration extends JFrame {
 							"No hay conexión a Internet", "Error de conexión",
 							JOptionPane.ERROR_MESSAGE);
 					return;
+				}
+				
+				Credencial credential = new Credencial();
+				String passText = new String(textPassword.getPassword());
+				if (!credential.login(""+editor.getId(), textUser.getText(), passText)){
+					JOptionPane.showMessageDialog(null,
+							"Su usuario o contraseña es incorrecta", "Error de autentificación",
+							JOptionPane.ERROR_MESSAGE);
+					return;							
 				}
 
 				String query = "SELECT * FROM [investic].[dbo].[tblReflexionProyectoInvestigacion] "
@@ -356,9 +379,11 @@ public class Administration extends JFrame {
 			}
 		});
 
-		download.setBounds(70, 90, 197, 40);
-
-		JButton upload = new JButton("Subir");
+		download.setBounds(72, 115, 196, 40);
+		JButton upload = new JButton("");
+		upload.setIcon(new ImageIcon(Administration.class.getResource("/imgs/upload.png")));
+		upload.setBackground(new Color(0,0,0,0));
+		
 		upload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConnectionJdbcOnline connectOnline = new ConnectionJdbcOnline();
@@ -370,6 +395,15 @@ public class Administration extends JFrame {
 							"No hay conexión a Internet", "Error de conexión",
 							JOptionPane.ERROR_MESSAGE);
 					return;
+				}
+				
+				Credencial credential = new Credencial();
+				String passText = new String(textPassword.getPassword());
+				if (!credential.login(""+editor.getId(), textUser.getText(), passText)){
+					JOptionPane.showMessageDialog(null,
+							"Su usuario o contraseña es incorrecta", "Error de autentificación",
+							JOptionPane.ERROR_MESSAGE);
+					return;							
 				}
 
 				String query = "SELECT * FROM tblReflexionProyectoInvestigacion "
@@ -653,13 +687,15 @@ public class Administration extends JFrame {
 			}
 		});
 		
-		upload.setBounds(70, 135, 197, 40);
+		upload.setBounds(95, 165, 162, 40);
 
 		Container container = getContentPane();
 		container.setLayout(null);
 		container.add(lblAdmin);
 		container.add(lblPassword);
 		container.add(textPassword);
+		container.add(lblUser);
+		container.add(textUser);
 		container.add(download);
 		container.add(upload);
 
