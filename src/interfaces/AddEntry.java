@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import org.classes.ComboItem;
@@ -121,6 +122,30 @@ public class AddEntry extends JFrame {
 					}					
 				}
 				
+				if(!isNumeric(textQuantity.getText())){
+					JOptionPane.showMessageDialog(null,
+							"La cantidad debe ser un valor numérico",
+							"Error de valor",
+							JOptionPane.ERROR_MESSAGE);	
+					return;
+				}
+				
+				if(!isNumeric(textUnitValue.getText())){
+					JOptionPane.showMessageDialog(null,
+							"El valor unitario debe ser un valor numérico",
+							"Error de valor",
+							JOptionPane.ERROR_MESSAGE);	
+					return;
+				}
+				
+				if(textDescription.getText().isEmpty()){
+					JOptionPane.showMessageDialog(null,
+							"Debe digitar una descripción",
+							"Error de valor",
+							JOptionPane.ERROR_MESSAGE);	
+					return;
+				}
+				
 				quantity = Float.parseFloat(textQuantity.getText());
 				unitValue = Float.parseFloat(textUnitValue.getText());
 				total = quantity * unitValue;
@@ -129,17 +154,17 @@ public class AddEntry extends JFrame {
 				textTotal.setText(String.valueOf(total));
 				
 				//System.out.println(comboEntry.getSelectedItem().toString());
-				System.out.println(entry);
-				System.out.println(quantity);
-				System.out.println(unitValue);
-				System.out.println(total);
-				System.out.println(description);
+				//System.out.println(entry);
+				//System.out.println(quantity);
+				//System.out.println(unitValue);
+				//System.out.println(total);
+				//System.out.println(description);
 				
 				String query = "INSERT INTO tblPresupuestoProyectoInvestigacion "
 						+ "(idGRupoInvestigacion, idRubro, DescripcionGasto, "
 						+ "ValorRubro, ValorUnitario, Total)"
 						+ " VALUES ("+id+","+entry+",'"+description+"',"+quantity+","+unitValue+","+total+")";
-				System.out.println(query);
+				
 				connect.executeUpdate(query);
 				dispose();
 				BinnacleFour binnacleFour=new BinnacleFour(editor);
@@ -165,4 +190,8 @@ public class AddEntry extends JFrame {
 		container.add(textDescription);
 		container.add(btnAddItem);
 	}
+	
+	public boolean isNumeric(String s) {  
+	    return s.matches("[-+]?\\d*\\.?\\d+");  
+	}  
 }

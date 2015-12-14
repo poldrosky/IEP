@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.entities.TblEntity;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -437,10 +439,16 @@ public class LoadFile {
 			}
 
 		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null,
+					"Ocurrio un error, problema con el archivo",
+					"Error al cargar el Archivo",
+					JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null,
+					"Ocurrio un error, problema con el archivo",
+					"Error al cargar el Archivo",
+					JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 		connect.close();
