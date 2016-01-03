@@ -60,7 +60,7 @@ public class Administration extends JFrame {
 	private List<List<String>> bSix = new ArrayList<List<String>>();
 	private List<String> bSixList = new ArrayList<String>();
 
-	public Administration(EditorProject editor) {
+	public Administration(final EditorProject editor) {
 		id = editor.getId();
 
 		setAlwaysOnTop(true);
@@ -108,7 +108,18 @@ public class Administration extends JFrame {
 							JOptionPane.ERROR_MESSAGE);
 					return;							
 				}
-
+				
+				int n = JOptionPane.showConfirmDialog(
+			            null,
+			            "Esta seguro de descargar la información?,\n los cambios en esta"
+			            + " versión se sobreescribirá",
+			            "Confirmación de sincronización",
+			            JOptionPane.YES_NO_OPTION);
+				
+				if (n==1){
+					return;
+				}
+				
 				String query = "SELECT * FROM [investic].[dbo].[tblReflexionProyectoInvestigacion] "
 						+ "WHERE [idGrupoInvestigacion] =" + id;
 				ResultSet rs = connectOnline.resultSet(query);
@@ -404,6 +415,17 @@ public class Administration extends JFrame {
 							"Su usuario o contraseña es incorrecta", "Error de autentificación",
 							JOptionPane.ERROR_MESSAGE);
 					return;							
+				}
+				
+				int n = JOptionPane.showConfirmDialog(
+			            null,
+			            "Esta seguro de descargar la información?,\n los cambios en la"
+			            + " versión Online se sobrescribirá",
+			            "Confirmación de sincronización",
+			            JOptionPane.YES_NO_OPTION);
+				
+				if (n==1){
+					return;
 				}
 
 				String query = "SELECT * FROM tblReflexionProyectoInvestigacion "

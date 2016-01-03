@@ -36,7 +36,7 @@ public class AddEntry extends JFrame {
 	int sizeEntry=0;
 	int entry, id;
 
-	public AddEntry(BinnacleFour bf, EditorProject editor) {
+	public AddEntry(BinnacleFour bf, final EditorProject editor) {
 		this.bf=bf;
 		id = editor.getId();
 		
@@ -133,6 +133,22 @@ public class AddEntry extends JFrame {
 				if(!isNumeric(textUnitValue.getText())){
 					JOptionPane.showMessageDialog(null,
 							"El valor unitario debe ser un valor numérico",
+							"Error de valor",
+							JOptionPane.ERROR_MESSAGE);	
+					return;
+				}
+				
+				if(Float.parseFloat(textQuantity.getText())<0){
+					JOptionPane.showMessageDialog(null,
+							"La cantidad debe ser un valor mayor a cero",
+							"Error de valor",
+							JOptionPane.ERROR_MESSAGE);	
+					return;
+				}
+				
+				if(Float.parseFloat(textUnitValue.getText())<0){
+					JOptionPane.showMessageDialog(null,
+							"El valor unitario debe ser un valor mayor a cero",
 							"Error de valor",
 							JOptionPane.ERROR_MESSAGE);	
 					return;

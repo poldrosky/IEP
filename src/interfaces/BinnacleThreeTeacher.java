@@ -76,13 +76,13 @@ public class BinnacleThreeTeacher extends JPanel {
 				return;
 			}				
 			
-			String query="UPDATE tblProblemaProyectoInvestigacionx set"
+			String query="UPDATE tblProblemaProyectoInvestigacion set"
 					+ " Como='"+textHow.getText()+"',"
 					+ " Reflexion='"+textReflection.getText()+"',"
 					+ " ConceptoAsesor='"+textConceptAdvisor.getText()+"'"
 					+ " WHERE idGrupoInvestigacion="+id;
 			
-			System.out.println(query);
+			//System.out.println(query);
 			
 			connect.executeUpdate(query);
 		}
